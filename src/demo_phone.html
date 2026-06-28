@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Fall Detection Demo – Phone Sensor</title>
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --card: #111827;
+      --border: #1e2d40;
+      --green: #10b981;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --font: 'Inter', system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+    }
+
+    /* ---- Header ---- */
+    header {
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header p {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ---- Cards ---- */
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .card-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    /* ---- Status Indicator ---- */
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--muted);
+      flex-shrink: 0;
+      transition: background 0.3s;
+      box-shadow: 0 0 0 0 transparent;
+    }
+
+    .dot.connected {
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+    }
+
+    .dot.streaming {
+      background: var(--blue);
+      box-shadow: 0 0 8px var(--blue);
+      animation: pulse 1s infinite;
+    }
+
+    .dot.error {
+      background: var(--red);
+      box-shadow: 0 0 8px var(--red);
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
+    }
+
+    #status-text {
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    /* ---- Server URL Input ---- */
+    label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 0.85rem;
+      padding: 10px 14px;
+      outline: none;
+      margin-bottom: 12px;
+      font-family: monospace;
+    }
+
+    input:focus {
+      border-color: var(--blue);
+    }
+
+    /* ---- Buttons ---- */
+    .btn-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      flex: 1;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 12px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    #btn-connect {
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      color: #fff;
+    }
+
+    #btn-disconnect {
+      background: var(--border);
+      color: var(--muted);
+    }
+
+    button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* ---- Prediction Result ---- */
+    #prediction-card {
+      transition: border-color 0.4s;
+    }
+
+    #prediction-card.normal {
+      border-color: var(--green);
+    }
+
+    #prediction-card.fall {
+      border-color: var(--red);
+    }
+
+    .result-label {
+      font-size: 1.6rem;
+      font-weight: 800;
+      text-align: center;
+      margin: 6px 0 4px;
+      transition: color 0.4s;
+    }
+
+    .result-label.normal {
+      color: var(--green);
+    }
+
+    .result-label.fall {
+      color: var(--red);
+    }
+
+    .result-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .confidence-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: var(--border);
+      border-radius: 99px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+
+    .confidence-bar {
+      height: 100%;
+      border-radius: 99px;
+      background: var(--green);
+      width: 0%;
+      transition: width 0.5s ease, background 0.4s;
+    }
+
+    .confidence-bar.fall {
+      background: var(--red);
+    }
+
+    /* ---- IMU Live Values ---- */
+    .imu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .imu-cell {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+
+    .imu-label {
+      font-size: 0.62rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .imu-val {
+      font-size: 0.92rem;
+      font-weight: 700;
+      font-family: monospace;
+    }
+
+    .imu-val.acc {
+      color: var(--blue);
+    }
+
+    .imu-val.gyro {
+      color: var(--purple);
+    }
+
+    /* ---- Stats ---- */
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .stat-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 6px;
+      text-align: center;
+    }
+
+    .stat-val {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .stat-key {
+      font-size: 0.6rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ---- Buffer Progress ---- */
+    .buf-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .buf-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .buf-pct {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .buf-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .buf-bar {
+      height: 100%;
+      border-radius: 99px;
+      background: var(--blue);
+      width: 0%;
+      transition: width 0.2s;
+    }
+
+    /* ---- Alert Banner ---- */
+    #alert-banner {
+      display: none;
+      width: 100%;
+      max-width: 480px;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--red);
+      border-radius: 14px;
+      padding: 14px 18px;
+      text-align: center;
+      color: var(--red);
+      font-weight: 700;
+      font-size: 1rem;
+      animation: shake 0.4s;
+      margin-bottom: 14px;
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0)
+      }
+
+      25% {
+        transform: translateX(-6px)
+      }
+
+      75% {
+        transform: translateX(6px)
+      }
+    }
+
+    /* ---- Orientation Warning ---- */
+    #orientation-warn {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid var(--yellow);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 0.76rem;
+      color: var(--yellow);
+      margin-bottom: 14px;
+      display: none;
+      text-align: center;
+    }
+
+    /* ---- Debug Info ---- */
+    .debug-row {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .debug-chip {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 0.68rem;
+      color: var(--muted);
+      font-family: monospace;
+    }
+
+    .debug-chip span {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .debug-chip.warn span { color: var(--yellow); }
+    .debug-chip.ok span   { color: var(--green); }
+
+    /* ---- Permission Notice ---- */
+    #permission-notice {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid var(--yellow);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 0.75rem;
+      color: var(--yellow);
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    footer {
+      margin-top: 10px;
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+
+  <header>
+    <h1> Fall Detection Demo</h1>
+    <p>Uses your phone's accelerometer &amp; gyroscope · 50 Hz streaming</p>
+  </header>
+
+  <!-- Orientation Warning -->
+  <div id="orientation-warn">
+    📱 <strong>Axis mismatch detected.</strong> Hold phone upright (portrait) for best accuracy.
+    Gravity auto-corrected to Y-axis.
+  </div>
+
+  <!-- Permission Notice (iOS) -->
+  <div id="permission-notice">
+    On iOS 13+, tap "Request Sensor Permission" below to allow gyroscope access.
+  </div>
+
+  <!-- Alert Banner -->
+  <div id="alert-banner"> FALL DETECTED!</div>
+
+  <!-- Connection Card -->
+  <div class="card">
+    <div class="card-title">Server Connection</div>
+    <label for="model-select">Target AI Model</label>
+    <select id="model-select" style="width:100%; padding:10px; margin-bottom:12px; background:var(--bg); color:var(--text); border:1px solid var(--border); border-radius:10px;">
+      <option value="human"> Human Fall Detection</option>
+      <option value="car"> Vehicle Crash Detection</option>
+    </select>
+
+    <label for="server-url">WebSocket URL</label>
+    <input type="text" id="server-url" value="ws://YOUR_PC_IP:8000/ws/predict" />
+    <div class="btn-row">
+      <button id="btn-connect">Connect &amp; Stream</button>
+      <button id="btn-disconnect" disabled>Disconnect</button>
+    </div>
+    <div class="status-row" style="margin-top:12px;">
+      <div class="dot" id="status-dot"></div>
+      <span id="status-text">Disconnected</span>
+    </div>
+  </div>
+
+  <!-- Prediction Card -->
+  <div class="card" id="prediction-card">
+    <div class="card-title">Live Prediction</div>
+    <div class="result-label" id="result-label">–</div>
+    <div class="confidence-bar-bg">
+      <div class="confidence-bar" id="confidence-bar"></div>
+    </div>
+    <div class="result-meta">
+      <span>Confidence: <strong id="conf-val">–</strong></span>
+      <span>Latency: <strong id="latency-val">–</strong></span>
+      <span>Window #<strong id="win-num">–</strong></span>
+    </div>
+    <!-- Debug row: raw model output -->
+    <div class="debug-row">
+      <div class="debug-chip" id="chip-raw">raw_score: <span id="d-raw">–</span></div>
+      <div class="debug-chip" id="chip-std">acc_mag_std: <span id="d-std">–</span></div>
+      <div class="debug-chip" id="chip-guard">guardrail: <span id="d-guard">–</span></div>
+      <div class="debug-chip" id="chip-axis">gravity_axis: <span id="d-axis">–</span></div>
+    </div>
+  </div>
+
+  <!-- Buffer Card -->
+  <div class="card">
+    <div class="card-title">Sliding Window Buffer</div>
+    <div class="buf-row">
+      <span class="buf-label" id="buf-label">0 / 128 samples</span>
+      <span class="buf-pct" id="buf-pct">0%</span>
+    </div>
+    <div class="buf-bar-bg">
+      <div class="buf-bar" id="buf-bar"></div>
+    </div>
+  </div>
+
+  <!-- Live Sensor Readings -->
+  <div class="card">
+    <div class="card-title">Live Sensor Readings</div>
+    <div class="imu-grid">
+      <div class="imu-cell">
+        <div class="imu-label">Acc X</div>
+        <div class="imu-val acc" id="v-ax">–</div>
+      </div>
+      <div class="imu-cell">
+        <div class="imu-label">Acc Y</div>
+        <div class="imu-val acc" id="v-ay">–</div>
+      </div>
+      <div class="imu-cell">
+        <div class="imu-label">Acc Z</div>
+        <div class="imu-val acc" id="v-az">–</div>
+      </div>
+      <div class="imu-cell">
+        <div class="imu-label">Gyro X</div>
+        <div class="imu-val gyro" id="v-gx">–</div>
+      </div>
+      <div class="imu-cell">
+        <div class="imu-label">Gyro Y</div>
+        <div class="imu-val gyro" id="v-gy">–</div>
+      </div>
+      <div class="imu-cell">
+        <div class="imu-label">Gyro Z</div>
+        <div class="imu-val gyro" id="v-gz">–</div>
+      </div>
+      <div class="imu-cell" style="grid-column: span 3; background:rgba(245,158,11,0.1)">
+        <div class="imu-label">GPS Speed (km/h)</div>
+        <div class="imu-val" id="v-spd" style="color:var(--yellow)">–</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Session Stats -->
+  <div class="card">
+    <div class="card-title">Session Statistics</div>
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="stat-val" id="stat-samples">0</div>
+        <div class="stat-key">Samples Sent</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="stat-windows">0</div>
+        <div class="stat-key">Predictions</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="stat-falls" style="color:var(--red)">0</div>
+        <div class="stat-key">Falls</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="stat-hz">–</div>
+        <div class="stat-key">Actual Hz</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- iOS Permission Button (hidden by default) -->
+  <button id="btn-permission"
+    style="display:none;max-width:480px;width:100%;background:var(--yellow);color:#000;border-radius:12px;padding:14px;font-size:0.9rem;margin-bottom:14px;">
+     Request Sensor Permission (iOS)
+  </button>
+
+  <footer>
+    Point your browser at <strong id="footer-url">http://YOUR_PC_IP:8000/demo</strong><br />
+    Keep the phone steady = Normal · Shake/tilt suddenly = Fall
+  </footer>
+
+  <script>
+    // ── Globals ──────────────────────────────────────────────────────────
+    let ws = null;
+    let sensorInterval = null;
+    let sampleCount = 0;
+    let windowCount = 0;
+    let fallCount = 0;
+    let lastHz = 0;
+    let hzSamples = 0;
+    let hzTimer = null;
+
+    // Latest IMU values (phone DeviceMotion API)
+    let imu = { ax: 0, ay: 0, az: 0, gx: 0, gy: 0, gz: 0 };
+    let gps = { lat: null, lon: null, speed: null };
+    let geoWatchId = null;
+    let gravityAxis = 1;  // 0=X, 1=Y(default/correct), 2=Z
+
+    const SERVER_HZ = 50;  // target streaming rate
+    const WINDOW_SIZE = 128;
+    const AXIS_NAMES = ['X', 'Y', 'Z'];
+
+    // ── DOM refs ──────────────────────────────────────────────────────────
+    const $url       = document.getElementById('server-url');
+    const $dot       = document.getElementById('status-dot');
+    const $statusTxt = document.getElementById('status-text');
+    const $btnConn   = document.getElementById('btn-connect');
+    const $btnDisc   = document.getElementById('btn-disconnect');
+    const $result    = document.getElementById('result-label');
+    const $confBar   = document.getElementById('confidence-bar');
+    const $confVal   = document.getElementById('conf-val');
+    const $latency   = document.getElementById('latency-val');
+    const $winNum    = document.getElementById('win-num');
+    const $predCard  = document.getElementById('prediction-card');
+    const $bufBar    = document.getElementById('buf-bar');
+    const $bufLabel  = document.getElementById('buf-label');
+    const $bufPct    = document.getElementById('buf-pct');
+    const $alert     = document.getElementById('alert-banner');
+    const $notice    = document.getElementById('permission-notice');
+    const $btnPerm   = document.getElementById('btn-permission');
+    const $orientWarn = document.getElementById('orientation-warn');
+
+    // ── iOS permission detection ──────────────────────────────────────────
+    if (typeof DeviceMotionEvent !== 'undefined' &&
+      typeof DeviceMotionEvent.requestPermission === 'function') {
+      $notice.style.display = 'block';
+      $btnPerm.style.display = 'block';
+      $btnPerm.onclick = async () => {
+        const res = await DeviceMotionEvent.requestPermission();
+        if (res === 'granted') {
+          $notice.style.display = 'none';
+          $btnPerm.style.display = 'none';
+          startMotionListener();
+        }
+      };
+    } else {
+      startMotionListener();
+    }
+
+    // ── DeviceMotion & Geolocation listeners ──────────────────────────────
+    function startMotionListener() {
+      window.addEventListener('devicemotion', (e) => {
+        const acc  = e.accelerationIncludingGravity || {};
+        const gyro = e.rotationRate || {};
+
+        // Raw accelerometer values (m/s², includes gravity)
+        const rawX = (acc.x || 0);
+        const rawY = (acc.y || 0);
+        const rawZ = (acc.z || 0);
+
+        // ── Gravity Axis Detection & Auto-Alignment ───────────────────────
+        // The model was trained on MobiFall data where gravity is on Y-axis.
+        // Detect which axis currently has the largest absolute mean (= gravity)
+        // and rotate axes so that value goes into acc_y before sending.
+        const absX = Math.abs(rawX);
+        const absY = Math.abs(rawY);
+        const absZ = Math.abs(rawZ);
+
+        // Smooth detection: track rolling max per axis
+        if (absX > absY && absX > absZ) {
+          gravityAxis = 0;  // gravity on X
+        } else if (absZ > absY && absZ > absX) {
+          gravityAxis = 2;  // gravity on Z
+        } else {
+          gravityAxis = 1;  // gravity on Y (correct)
+        }
+
+        // Show/hide orientation warning
+        if (gravityAxis !== 1) {
+          $orientWarn.style.display = 'block';
+        } else {
+          $orientWarn.style.display = 'none';
+        }
+
+        // Re-orient: cyclically rotate so gravity lands on Y
+        let aligned_x, aligned_y, aligned_z;
+        if (gravityAxis === 0) {
+          // Gravity on X -> rotate: new_y=old_x, new_x=old_y, new_z=old_z
+          aligned_x = rawY; aligned_y = rawX; aligned_z = rawZ;
+        } else if (gravityAxis === 2) {
+          // Gravity on Z -> rotate: new_y=old_z, new_z=old_y, new_x=old_x
+          aligned_x = rawX; aligned_y = rawZ; aligned_z = rawY;
+        } else {
+          // Gravity already on Y (correct)
+          aligned_x = rawX; aligned_y = rawY; aligned_z = rawZ;
+        }
+
+        imu.ax = aligned_x;
+        imu.ay = aligned_y;
+        imu.az = aligned_z;
+        // gyroscope deg/s (alpha=yaw, beta=pitch, gamma=roll)
+        imu.gx = (gyro.beta  || 0);  // pitch -> X rotation
+        imu.gy = (gyro.gamma || 0);  // roll  -> Y rotation
+        imu.gz = (gyro.alpha || 0);  // yaw   -> Z rotation
+
+        // Update live display (show raw values before alignment for transparency)
+        document.getElementById('v-ax').textContent = imu.ax.toFixed(2);
+        document.getElementById('v-ay').textContent = imu.ay.toFixed(2);
+        document.getElementById('v-az').textContent = imu.az.toFixed(2);
+        document.getElementById('v-gx').textContent = imu.gx.toFixed(1);
+        document.getElementById('v-gy').textContent = imu.gy.toFixed(1);
+        document.getElementById('v-gz').textContent = imu.gz.toFixed(1);
+        // Update gravity axis debug chip
+        document.getElementById('d-axis').textContent =
+          AXIS_NAMES[gravityAxis] + (gravityAxis !== 1 ? ' ⚠️' : ' ✓');
+      });
+
+      if ('geolocation' in navigator) {
+        geoWatchId = navigator.geolocation.watchPosition(
+          (pos) => {
+            gps.lat = pos.coords.latitude;
+            gps.lon = pos.coords.longitude;
+            gps.speed = (pos.coords.speed || 0) * 3.6; // m/s to km/h
+            document.getElementById('v-spd').textContent = gps.speed.toFixed(1);
+          },
+          (err) => console.warn('GPS Error:', err),
+          { enableHighAccuracy: true }
+        );
+      }
+    }
+
+    // ── WebSocket Connection ───────────────────────────────────────────────
+    function setStatus(state, text) {
+      $dot.className = 'dot ' + state;
+      $statusTxt.textContent = text;
+    }
+
+    $btnConn.onclick = () => {
+      const baseUrl = $url.value.trim();
+      if (!baseUrl) return;
+      
+      const model = document.getElementById('model-select').value;
+      const url = baseUrl + '?model=' + model;
+      connect(url);
+    };
+
+    $btnDisc.onclick = () => {
+      if (ws) ws.close();
+      stopStreaming();
+    };
+
+    function connect(url) {
+      setStatus('', 'Connecting…');
+      ws = new WebSocket(url);
+
+      ws.onopen = () => {
+        setStatus('connected', 'Connected — starting stream…');
+        $btnConn.disabled = true;
+        $btnDisc.disabled = false;
+        startStreaming();
+      };
+
+      ws.onmessage = (ev) => {
+        const msg = JSON.parse(ev.data);
+        if (msg.event === 'prediction') {
+          handlePrediction(msg);
+        } else if (msg.event === 'buffering') {
+          updateBuffer(msg.buffer_fill, msg.window_size);
+        } else if (msg.event === 'error') {
+          console.warn('Server error:', msg.detail);
+        }
+      };
+
+      ws.onerror = () => setStatus('error', 'Connection error');
+      ws.onclose = () => {
+        setStatus('error', 'Disconnected');
+        stopStreaming();
+        $btnConn.disabled = false;
+        $btnDisc.disabled = true;
+      };
+    }
+
+    // ── Streaming Loop ────────────────────────────────────────────────────
+    function startStreaming() {
+      setStatus('streaming', `Streaming at ${SERVER_HZ} Hz…`);
+      sampleCount = 0; windowCount = 0; fallCount = 0; hzSamples = 0;
+
+      // Hz counter (refresh every second)
+      hzTimer = setInterval(() => {
+        document.getElementById('stat-hz').textContent = hzSamples;
+        hzSamples = 0;
+      }, 1000);
+
+      sensorInterval = setInterval(() => {
+        if (!ws || ws.readyState !== WebSocket.OPEN) return;
+
+        const payload = {
+          acc_x: clamp(imu.ax, -20, 20),
+          acc_y: clamp(imu.ay, -20, 20),
+          acc_z: clamp(imu.az, -20, 20),
+          gyro_x: clamp(imu.gx, -600, 600),
+          gyro_y: clamp(imu.gy, -600, 600),
+          gyro_z: clamp(imu.gz, -600, 600),
+          latitude: gps.lat,
+          longitude: gps.lon,
+          speed_kmh: gps.speed
+        };
+        ws.send(JSON.stringify(payload));
+        sampleCount++;
+        hzSamples++;
+        document.getElementById('stat-samples').textContent = sampleCount;
+      }, 1000 / SERVER_HZ);
+    }
+
+    function stopStreaming() {
+      clearInterval(sensorInterval);
+      clearInterval(hzTimer);
+      sensorInterval = null;
+      ws = null;
+    }
+
+    // ── Prediction Handler ────────────────────────────────────────────────
+    function handlePrediction(msg) {
+      const isFall = msg.label !== 'Normal Activity';
+      windowCount++;
+      if (isFall) fallCount++;
+
+      // Label
+      $result.textContent = isFall ? 'FALL!' : 'Normal';
+      $result.className = 'result-label ' + (isFall ? 'fall' : 'normal');
+      $predCard.className = 'card ' + (isFall ? 'fall' : 'normal');
+
+      // Confidence bar
+      const pct = (msg.confidence * 100).toFixed(1);
+      $confBar.style.width = pct + '%';
+      $confBar.className = 'confidence-bar ' + (isFall ? 'fall' : '');
+      $confVal.textContent = pct + '%';
+      $latency.textContent = msg.latency_ms + ' ms';
+      $winNum.textContent = windowCount;
+
+      // ── Debug chips ──
+      const rawScore = msg.raw_score !== undefined ? msg.raw_score.toFixed(4) : '–';
+      document.getElementById('d-raw').textContent = rawScore;
+
+      if (msg.acc_mag_std !== undefined) {
+        document.getElementById('d-std').textContent = msg.acc_mag_std.toFixed(4);
+      }
+
+      if (msg.guardrail_fired !== undefined) {
+        const gEl = document.getElementById('d-guard');
+        const chipGuard = document.getElementById('chip-guard');
+        gEl.textContent = msg.guardrail_fired ? 'YES ⚠️' : 'no';
+        chipGuard.className = 'debug-chip ' + (msg.guardrail_fired ? 'warn' : 'ok');
+      }
+
+      // Alert banner
+      if (isFall) {
+        $alert.style.display = 'block';
+        setTimeout(() => { $alert.style.display = 'none'; }, 2000);
+      }
+
+      // Stats
+      document.getElementById('stat-windows').textContent = windowCount;
+      document.getElementById('stat-falls').textContent = fallCount;
+
+      // Buffer resets to step size after prediction
+      updateBuffer(64, WINDOW_SIZE);
+    }
+
+    function updateBuffer(fill, size) {
+      const pct = Math.round((fill / size) * 100);
+      $bufBar.style.width = pct + '%';
+      $bufLabel.textContent = `${fill} / ${size} samples`;
+      $bufPct.textContent = pct + '%';
+    }
+
+    // ── Helpers ───────────────────────────────────────────────────────────
+    function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+    // Show LAN IP hint in footer
+    const proto = location.protocol === 'https:' ? 'wss' : 'ws';
+    $url.value = `${proto}://${location.hostname || 'YOUR_PC_IP'}:8000/ws/predict`;
+    document.getElementById('footer-url').textContent =
+      `http://${location.hostname || 'YOUR_PC_IP'}:8000/demo`;
+  </script>
+</body>
+
+</html>
