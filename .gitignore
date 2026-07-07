@@ -1,63 +1,41 @@
-# Python
+# LaTeX compilation artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.toc
+*.lof
+*.lot
+*.out
+*.synctex.gz
+build/
+
+# Python environment and cache
 __pycache__/
-*.py[cod]
-*$py.class
 *.pyc
 *.pyo
-
-# Environments
-.env
+*.pyd
+.pytest_cache/
+fall/
 .venv/
 venv/
-env/
+ENV/
 
-# Jupyter
-.ipynb_checkpoints/
-*.ipynb_checkpoints
-
-# Dataset (large files – download via kagglehub or store locally)
-data/raw/
-data/processed/
-
-# Logs
-logs/
-
-# Models (optional – comment out if you want to track models in Git)
-# models/
-
-# OS
-.DS_Store
+# OS specific files
 Thumbs.db
+ehthumbs.db
+Desktop.ini
 
-# IDE
-.vscode/
-.idea/
-
-# Presentations
-*.ppt
-*.pptx
-
-# Internal Notes
-notes/
-
-# Archives
+# Zip archives (local copies)
 *.zip
+*.rar
+*.tar.gz
 
-# Lock files (LibreOffice)
-.~lock.*
+# Local dev server keys & certs
+*.pem
 
-# One-off paper generation scripts
-generate_docx.py
-generate_formatted_paper.py
-
-# Exclude LaTeX and Report folders from Git
-Journal/
-Project Report/
-Project Report Template LaTex Files/
-Project Report Template.pdf
-mingit/
-mingit.zip
-*.zip
-*.pdf
-tectonic/
-
+# Local configuration
+.agents/
+config.yaml

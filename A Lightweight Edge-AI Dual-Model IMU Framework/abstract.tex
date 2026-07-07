@@ -1,0 +1,20 @@
+\thispagestyle{plain}
+\begin{center}
+\textbf{\fontsize{16pt}{24pt}\selectfont ABSTRACT}
+\end{center}
+
+\vspace{0.3cm}
+
+\fontsize{12pt}{18pt}\selectfont
+Road traffic accidents kill roughly 1.35 million people every year, and a significant fraction of those fatalities are worsened by delayed emergency response. This report presents the \textbf{Passenger Safety and Fall Detection System}, a real-time, edge-deployable software framework that monitors both human passenger falls and high-impact vehicular crashes using the 6-axis Inertial Measurement Unit (IMU) already built into any modern smartphone.
+
+The system is built around a \textit{Dual-Model Architecture} in which two lightweight 1D Convolutional Neural Networks (1D-CNN) share a single hot-swappable inference engine. The first model is trained on the MobiFall v2.0 human fall dataset; the second is trained on a physics-derived synthetic vehicle-crash dataset. Both models are compressed from 140 KB to approximately 15 KB using TensorFlow Lite (TFLite) dynamic quantization, enabling deployment on a Raspberry Pi 4 or any Android device without cloud connectivity.
+
+A FastAPI WebSocket server accepts a continuous 50 Hz sensor stream from a mobile browser, processes each 128-sample window using a sliding-window approach with 50\% overlap, and, on detecting a crash at speed, automatically fires an emergency SMS containing GPS coordinates and vehicle speed via the Twilio API.
+
+In experiments on the MobiFall v2.0 benchmark, the 1D-CNN achieved 96.65\% accuracy with only 8,481 trainable parameters and an average inference latency of 2 ms. Five-fold cross-validation confirmed 100\% accuracy on the synthetic crash dataset. Among four architectures evaluated (1D-CNN, LSTM, CNN-LSTM, Transformer), the 1D-CNN offered the best balance of accuracy, model size, and runtime speed.
+
+\vspace{0.5cm}
+\textit{Keywords}: fall detection, vehicular crash detection, 1D-CNN, TFLite, edge AI, IMU, FastAPI, WebSocket, SOS, MobiFall, passenger safety.
+
+\newpage

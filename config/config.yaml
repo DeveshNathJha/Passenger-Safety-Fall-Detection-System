@@ -22,7 +22,7 @@ windowing:
 model:
   input_shape: [128, 6]
   selected_architecture: "1D-CNN"   # Options: 1D-CNN | LSTM | CNN-LSTM | Transformer
-  epochs: 10
+  epochs: 50
   batch_size: 64
   test_size: 0.2
   random_state: 42

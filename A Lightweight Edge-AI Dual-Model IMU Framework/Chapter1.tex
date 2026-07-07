@@ -1,0 +1,58 @@
+\chapter{Introduction}
+
+\section{Background}
+\label{sec:background}
+
+Road accidents remain among the leading causes of death worldwide, accounting for approximately 1.35 million fatalities and tens of millions of injuries every year \citep{who_road_safety}. A well-documented factor that worsens outcomes after a crash is the time taken for emergency services to reach the victim. The concept of the \textit{Golden Hour} in trauma medicine captures this: survival rates drop sharply when the gap between a crash and first medical contact exceeds sixty minutes \citep{golden_hour}.
+
+Modern vehicles are increasingly equipped with active safety features such as Anti-lock Braking Systems (ABS), airbags, and Advanced Driver Assistance Systems (ADAS). However, these systems are designed to prevent or soften the crash itself; once the collision has occurred, they provide no mechanism for alerting emergency services or next-of-kin. A person rendered unconscious inside a crashed vehicle may remain undetected for a long time, especially in remote areas or at night.
+
+Smartphones present an underexplored opportunity. Virtually every passenger carries one, and modern smartphones already contain a 6-axis Inertial Measurement Unit (IMU) comprising a 3-axis accelerometer and a 3-axis gyroscope. The violent inertial signature of a collision is easily distinguishable from normal travel in the raw sensor data. What has been missing is a lightweight, always-on, on-device software layer that can process this data reliably and act on it automatically.
+
+Elderly individuals and people with medical conditions who travel by road face an additional risk: an in-vehicle fall (caused by sudden braking, swerving, or a medical episode) can leave them incapacitated without triggering any vehicle-level alarm. Detecting both vehicular crashes and in-vehicle human falls from the same IMU sensor, using a unified software system, is therefore a practically important problem.
+
+\section{Motivation}
+\label{sec:motivation}
+
+The key insight driving this project is that the smartphone in a passenger's pocket is already a capable sensor platform. It streams accelerometer and gyroscope data at up to 50 Hz, records GPS coordinates and speed, and can communicate over Wi-Fi or cellular networks. The missing component is a computationally lean, privacy-preserving inference layer that runs without cloud round-trips and fires an emergency alert within seconds of a detected event.
+
+Several practical constraints shaped the design goals:
+\begin{itemize}
+    \item \textbf{On-device inference}: Raw sensor data must not leave the device under normal operation. Privacy and latency both demand local processing.
+    \item \textbf{Low computational footprint}: The model must run on consumer hardware with no dedicated AI accelerator. A Raspberry Pi 4 or a mid-range Android phone should suffice.
+    \item \textbf{No labeled real crash data}: Obtaining large labeled datasets of real vehicular crashes is practically impossible. The system must work without them.
+    \item \textbf{Dual detection}: The same sensor pipeline should detect both human falls and vehicle crashes, switching between detection modes at runtime based on context.
+\end{itemize}
+
+\section{Objectives}
+\label{sec:objectives}
+
+The primary objectives of this project are:
+
+\begin{enumerate}
+    \item Design and implement a \textbf{Dual-Model 1D-CNN Architecture} that can distinguish normal passenger motion, human falls, and high-impact vehicular crashes from 6-axis IMU data.
+    \item Build a \textbf{Stateful Ring-Buffer Inference Engine} (\textit{FallDetectionEngine}) that processes a continuous 50 Hz sensor stream, runs TFLite inference in under 3 ms per window, and supports model hot-swapping at runtime.
+    \item Generate a \textbf{Physics-Based Synthetic Crash Dataset} to train the vehicle crash model without requiring real crash recordings.
+    \item Deploy a \textbf{Real-Time WebSocket API} (FastAPI) that accepts a live sensor stream from any browser-capable mobile device and triggers an automated SOS SMS (with GPS and speed) via Twilio on crash detection.
+    \item Quantitatively compare four deep learning architectures (1D-CNN, LSTM, CNN-LSTM, Transformer) on the MobiFall v2.0 benchmark to justify the deployment choice.
+\end{enumerate}
+
+\section{Deliverables}
+\label{sec:deliverables}
+
+The deliverables produced at the end of this project include:
+\begin{itemize}
+    \item A trained and quantized 1D-CNN model for human fall detection (\url{mobifall_edge_model.tflite}, 15 KB).
+    \item A trained and quantized 1D-CNN model for vehicular crash detection (\url{car_crash_model.tflite}, 15 KB).
+    \item A stateful inference engine (\url{src/inference.py}) capable of serving both models over a WebSocket stream.
+    \item A FastAPI backend server (\url{src/app.py}) with real-time WebSocket support and REST API endpoints.
+    \item A mobile HTML5 dashboard that streams 50 Hz IMU data from the browser and displays live predictions.
+    \item A physics-based crash data generator (\url{scripts/generate_car_crash_data.py}).
+    \item A complete test suite covering preprocessing, inference engine state machine, and API schema.
+    \item This project report and the associated GitHub repository.
+\end{itemize}
+
+\section{Organisation of the Report}
+\label{sec:organisation}
+
+Chapter 2 reviews related work on fall detection, vehicular crash sensing, and edge AI deployment. Chapter 3 describes the datasets, system architecture, model design, and training methodology. Chapter 4 presents experimental results including accuracy comparisons, latency measurements, and live system tests. Chapter 5 summarises the findings and identifies directions for future work.

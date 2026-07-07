@@ -1,0 +1,49 @@
+\chapter{Summary and Conclusions}
+\label{sec:5}
+
+\section{Summary}
+\label{sec:summary}
+
+This project designed and implemented a complete, deployable Passenger Safety and Fall Detection System that addresses a practical gap in road safety: the window between a crash or fall event and the arrival of emergency help. The system treats the smartphone as both a sensor and an actuator, using its built-in 6-axis IMU to detect dangerous inertial events and its network connectivity to fire an automated SOS alert.
+
+The key technical contributions are:
+
+\begin{itemize}
+    \item \textbf{Dual-Model 1D-CNN Architecture}: Two independently trained 1D-CNN models share a single hot-swappable inference engine. One model detects human passenger falls (trained on MobiFall v2.0); the other detects high-impact vehicular crashes (trained on a physics-derived synthetic dataset). Switching between modes at runtime requires no server restart.
+
+    \item \textbf{Physics-Based Synthetic Crash Dataset}: A first-principles generator creates crash training sequences by simulating the high-G deceleration spike and post-crash silence that characterise real vehicular collisions (20--50 g, consistent with NHTSA standards). This removes the dependency on rare, expensive real crash recordings.
+
+    \item \textbf{Edge-Optimised Inference Pipeline}: TFLite dynamic quantization compresses each model from 140 KB to approximately 15 KB (89\% reduction) with negligible accuracy loss. The stateful ring-buffer inference engine processes a 50 Hz sensor stream and delivers predictions every 1.28 seconds at sub-3 ms latency, making real-time operation on a Raspberry Pi 4 or Android device practical.
+
+    \item \textbf{Automated SOS Alerting}: On crash detection at speed, the system dispatches an SMS containing GPS coordinates and last known vehicle speed to pre-configured emergency contacts via Twilio, closing the loop between detection and emergency response.
+\end{itemize}
+
+In experiments on the MobiFall v2.0 benchmark, the 1D-CNN reached 96.65\% accuracy with 8,481 trainable parameters and 2 ms average inference latency. Among four architectures evaluated under identical conditions, the 1D-CNN offered the best balance of accuracy, model size, and runtime speed. The crash model achieved 93.61\% test accuracy and 100\% cross-validation accuracy on the synthetic dataset.
+
+\section{Conclusions}
+\label{sec:conclusions}
+
+This work demonstrates that a smartphone IMU, combined with a compact quantized neural network and a lightweight WebSocket server, is sufficient to build a practical, always-on passenger safety monitor. No specialised hardware, cloud services, or large labeled crash datasets are required.
+
+The principal conclusion is that the 1D-CNN, when properly quantized, is the most suitable architecture for edge safety applications of this type. Its local receptive fields naturally capture the brief, localised inertial spikes that characterise both human falls and vehicular crashes, and its fully parallelisable convolutions keep inference latency well below the 64-sample prediction interval.
+
+The physics-based crash data generation approach is a practically important contribution: it shows that, for events with highly distinctive physical signatures, synthetic data can substitute for real labeled recordings without sacrificing detection performance.
+
+\section{Future Work}
+\label{sec:future}
+
+Several directions are identified for extending this work:
+
+\begin{enumerate}
+    \item \textbf{Real crash data integration}: Training and fine-tuning the crash model on real crash recordings from instrumented vehicles (such as those in the NHTSA database) would improve generalisation to a broader range of impact geometries (oblique collisions, rollovers).
+
+    \item \textbf{Subject-independent evaluation}: A formal leave-one-subject-out evaluation across all 24 MobiFall subjects would provide a more rigorous measure of generalisation to unseen users.
+
+    \item \textbf{Sensor placement robustness}: A startup calibration routine that detects the phone's mounting orientation (pocket, dashboard, chest) would improve reliability across deployment scenarios.
+
+    \item \textbf{Barometric pressure fusion}: Adding barometric pressure readings to the sensor stream would enable rollover altitude estimation and improve crash characterisation.
+
+    \item \textbf{Cellular positioning fallback}: Replacing GPS with cell-tower or Wi-Fi SSID positioning when GPS is unavailable (tunnels, underground car parks) would make the SOS feature more robust.
+
+    \item \textbf{On-device Android deployment}: Packaging the TFLite model and inference engine as a native Android application would eliminate the Wi-Fi dependency and enable fully standalone operation.
+\end{enumerate}
