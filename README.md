@@ -1,14 +1,14 @@
 <div align="center">
 
-#  Passenger Safety & Fall Detection System
+# A Lightweight Edge-AI Dual-Model IMU Framework for Fall and Crash-Like Event Detection with Automated SOS Alerting
 
-**A production-ready Edge AI pipeline for real-time in-vehicle passenger fall detection using 6-axis IMU data.**
+**A production-ready Edge AI pipeline for real-time human fall and vehicle crash detection using 6-axis IMU data.**
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)](https://python.org)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.15-orange?logo=tensorflow)](https://tensorflow.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110-009688?logo=fastapi)](https://fastapi.tiangolo.com)
 [![TFLite](https://img.shields.io/badge/TFLite-Edge%20Optimized-blueviolet)](https://tensorflow.org/lite)
-[![Accuracy](https://img.shields.io/badge/Accuracy-97.04%25-brightgreen)](#model-performance)
+[![Accuracy](https://img.shields.io/badge/Accuracy-96.65%25-brightgreen)](#model-performance)
 
 </div>
 
@@ -20,14 +20,23 @@ This system features a **Dual-Model Architecture** to detect both **Human Passen
 
 Key features include:
 * **Human Fall Detection**: Trained on the MobiFall v2.0 Dataset.
-* **Car Crash Detection**: Trained on a physics-based synthetic dataset simulating high-G impacts and rollovers.
+* **Car Crash Detection**: Trained on a physics-based synthetic dataset simulating high-G impacts.
 * **Sensor Fusion**: Integrates 6-axis IMU (Accelerometer + Gyroscope) with live GPS Coordinates and Speed.
 * **Automated SOS**: Triggers emergency alerts via Twilio SMS when a crash is detected at speed.
 * **Mobile Dashboard**: A real-time HTML5 interface for sensor streaming and visualization.
 
+<div align="center">
+  <h3>Mobile App Dashboard Preview</h3>
+  <img src="Journal/figures/mobile_dashboard.png" width="800" alt="Mobile App Dashboard">
+</div>
+
 ---
 
 ##  Architecture
+
+<div align="center">
+  <img src="Journal/figures/system_architecture.png" width="800" alt="System Architecture">
+</div>
 
 ```
 ┌─────────────────────────────────────────────────────────────┐

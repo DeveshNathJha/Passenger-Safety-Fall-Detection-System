@@ -39,3 +39,22 @@ Desktop.ini
 # Local configuration
 .agents/
 config.yaml
+
+# LaTeX Project Folders (Reports and Journals)
+A Lightweight Edge-AI Dual-Model IMU Framework/
+Conference Paper/
+Journal/
+PPT/
+
+# PDF Templates & Guidelines
+Project Report Template.pdf
+Review points.docx
+
+# Logs, Notes and planning files
+notes/
+CHANGELOG.txt
+implementation_plan.md
+walkthrough.md
+*.log
+logs/
+
