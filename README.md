@@ -12,6 +12,17 @@
 
 </div>
 
+<div align="center">
+  <h3>Mobile App Dashboard Preview</h3>
+  <img src="media/mobile_dashboard.png" width="800" alt="Mobile App Dashboard">
+</div>
+
+<div align="center">
+  <h3>Real-Time Live Device Monitoring</h3>
+  <img src="media/Normal_Screenshot.jpeg" width="300" alt="Normal Mode Dashboard"> &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="media/Fall_Screenshot.jpeg" width="300" alt="Fall Mode Dashboard">
+</div>
+
 ---
 
 ##  Overview
@@ -25,17 +36,12 @@ Key features include:
 * **Automated SOS**: Triggers emergency alerts via Twilio SMS when a crash is detected at speed.
 * **Mobile Dashboard**: A real-time HTML5 interface for sensor streaming and visualization.
 
-<div align="center">
-  <h3>Mobile App Dashboard Preview</h3>
-  <img src="Journal/figures/mobile_dashboard.png" width="800" alt="Mobile App Dashboard">
-</div>
-
 ---
 
 ##  Architecture
 
 <div align="center">
-  <img src="Journal/figures/system_architecture.png" width="800" alt="System Architecture">
+  <img src="media/system_architecture.png" width="800" alt="System Architecture">
 </div>
 
 ```
