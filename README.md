@@ -41,6 +41,10 @@ Key features include:
 ##  Architecture
 
 <div align="center">
+  <img src="system_flowchart_1783615736756.png" width="800" alt="System Flowchart">
+</div>
+
+<div align="center">
   <img src="media/system_architecture.png" width="800" alt="System Architecture">
 </div>
 
@@ -236,6 +240,10 @@ REST alternative to WebSocket for single sample push.
 ---
 
 ##  Model Performance
+
+<div align="center">
+  <img src="cnn_architecture_1783618267467.png" width="800" alt="1D-CNN Architecture">
+</div>
 
 | Architecture | Accuracy | Precision (Fall) | Recall (Fall) | F1-Score (Fall) | Parameters | Training Time | Deployment |
 |---|---|---|---|---|---|---|---|
