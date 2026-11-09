@@ -6,6 +6,8 @@ REM  Phones only expose motion sensors over HTTPS, so if key.pem /
 REM  cert.pem exist (e.g. created with mkcert) the server uses TLS.
 REM  Set VENV to your virtual environment folder (default: .venv).
 REM ------------------------------------------------------------------
+if "%VENV%"=="" if exist "C:\fall_detection_env\Scripts\python.exe" set VENV=C:\fall_detection_env
+if "%VENV%"=="" if exist "fall_detection_env\Scripts\python.exe" set VENV=fall_detection_env
 if "%VENV%"=="" set VENV=.venv
 
 for /f "usebackq tokens=*" %%i in (`powershell -NoProfile -Command "(Get-NetIPAddress -AddressFamily IPv4 | Where-Object {$_.IPAddress -notlike '127.*' -and $_.IPAddress -notlike '169.254.*' -and $_.PrefixOrigin -ne 'WellKnown'} | Select-Object -First 1).IPAddress"`) do set IP=%%i
