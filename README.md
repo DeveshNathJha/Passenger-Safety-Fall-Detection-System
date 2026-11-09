@@ -4,6 +4,7 @@
 real-time WebSocket API, a post-fall confirmation stage and a cancellable SOS workflow.**
 
 [![CI](https://github.com/DeveshNathJha/Passenger-Safety-Fall-Detection-System/actions/workflows/ci.yml/badge.svg)](https://github.com/DeveshNathJha/Passenger-Safety-Fall-Detection-System/actions/workflows/ci.yml)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Render-00c58e?logo=render&logoColor=white)](https://passenger-safety-ai.onrender.com/demo)
 ![Python](https://img.shields.io/badge/Python-3.10–3.12-blue?logo=python)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.20-orange?logo=tensorflow)
 ![FastAPI](https://img.shields.io/badge/FastAPI-WebSocket-009688?logo=fastapi)
