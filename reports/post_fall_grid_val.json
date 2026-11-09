@@ -1,0 +1,1503 @@
+{
+  "task": "human",
+  "subjects": "val",
+  "prefix": null,
+  "model": "human_fall.tflite",
+  "threshold": 0.9285,
+  "check_params": {
+    "settle_s": 1.0,
+    "still_s": 1.5,
+    "still_acc_std": 1.5,
+    "still_gyro_dps": 30.0
+  },
+  "check_off": {
+    "fall_recordings": 36,
+    "falls_detected": 36,
+    "fall_recall": 1.0,
+    "missed_falls_by_code": {},
+    "off_target_events_in_fall_recordings": 0,
+    "adl_recordings": 38,
+    "adl_hours": 0.279,
+    "false_alarms": 0,
+    "false_alarms_per_hour": 0.0,
+    "adl_recordings_with_false_alarm": 0,
+    "false_alarms_by_code": {
+      "CSI": {
+        "recordings": 6,
+        "false_alarms": 0,
+        "minutes": 0.6
+      },
+      "CSO": {
+        "recordings": 6,
+        "false_alarms": 0,
+        "minutes": 0.6
+      },
+      "JOG": {
+        "recordings": 3,
+        "false_alarms": 0,
+        "minutes": 1.5
+      },
+      "JUM": {
+        "recordings": 3,
+        "false_alarms": 0,
+        "minutes": 1.5
+      },
+      "SCH": {
+        "recordings": 6,
+        "false_alarms": 0,
+        "minutes": 0.6
+      },
+      "STD": {
+        "recordings": 1,
+        "false_alarms": 0,
+        "minutes": 5.0
+      },
+      "STN": {
+        "recordings": 6,
+        "false_alarms": 0,
+        "minutes": 1.0
+      },
+      "STU": {
+        "recordings": 6,
+        "false_alarms": 0,
+        "minutes": 1.0
+      },
+      "WAL": {
+        "recordings": 1,
+        "false_alarms": 0,
+        "minutes": 5.0
+      }
+    }
+  },
+  "check_on": {
+    "fall_recordings": 36,
+    "falls_detected": 34,
+    "fall_recall": 0.9444,
+    "missed_falls_by_code": {
+      "BSC": 2
+    },
+    "off_target_events_in_fall_recordings": 0,
+    "adl_recordings": 38,
+    "adl_hours": 0.279,
+    "false_alarms": 0,
+    "false_alarms_per_hour": 0.0,
+    "adl_recordings_with_false_alarm": 0,
+    "false_alarms_by_code": {
+      "CSI": {
+        "recordings": 6,
+        "false_alarms": 0,
+        "minutes": 0.6
+      },
+      "CSO": {
+        "recordings": 6,
+        "false_alarms": 0,
+        "minutes": 0.6
+      },
+      "JOG": {
+        "recordings": 3,
+        "false_alarms": 0,
+        "minutes": 1.5
+      },
+      "JUM": {
+        "recordings": 3,
+        "false_alarms": 0,
+        "minutes": 1.5
+      },
+      "SCH": {
+        "recordings": 6,
+        "false_alarms": 0,
+        "minutes": 0.6
+      },
+      "STD": {
+        "recordings": 1,
+        "false_alarms": 0,
+        "minutes": 5.0
+      },
+      "STN": {
+        "recordings": 6,
+        "false_alarms": 0,
+        "minutes": 1.0
+      },
+      "STU": {
+        "recordings": 6,
+        "false_alarms": 0,
+        "minutes": 1.0
+      },
+      "WAL": {
+        "recordings": 1,
+        "false_alarms": 0,
+        "minutes": 5.0
+      }
+    }
+  },
+  "grid_search": {
+    "objective": "min false alarms s.t. recall >= recall_off - 0.02",
+    "baseline_off": {
+      "fall_recordings": 36,
+      "falls_detected": 36,
+      "fall_recall": 1.0,
+      "missed_falls_by_code": {},
+      "off_target_events_in_fall_recordings": 0,
+      "adl_recordings": 38,
+      "adl_hours": 0.279,
+      "false_alarms": 0,
+      "false_alarms_per_hour": 0.0,
+      "adl_recordings_with_false_alarm": 0,
+      "false_alarms_by_code": {
+        "CSI": {
+          "recordings": 6,
+          "false_alarms": 0,
+          "minutes": 0.6
+        },
+        "CSO": {
+          "recordings": 6,
+          "false_alarms": 0,
+          "minutes": 0.6
+        },
+        "JOG": {
+          "recordings": 3,
+          "false_alarms": 0,
+          "minutes": 1.5
+        },
+        "JUM": {
+          "recordings": 3,
+          "false_alarms": 0,
+          "minutes": 1.5
+        },
+        "SCH": {
+          "recordings": 6,
+          "false_alarms": 0,
+          "minutes": 0.6
+        },
+        "STD": {
+          "recordings": 1,
+          "false_alarms": 0,
+          "minutes": 5.0
+        },
+        "STN": {
+          "recordings": 6,
+          "false_alarms": 0,
+          "minutes": 1.0
+        },
+        "STU": {
+          "recordings": 6,
+          "false_alarms": 0,
+          "minutes": 1.0
+        },
+        "WAL": {
+          "recordings": 1,
+          "false_alarms": 0,
+          "minutes": 5.0
+        }
+      }
+    },
+    "recall_floor": 0.98,
+    "best": {
+      "settle_s": 1.0,
+      "still_s": 1.5,
+      "still_acc_std": 3.0,
+      "still_gyro_dps": 60.0,
+      "fall_recall": 1.0,
+      "false_alarms": 0,
+      "false_alarms_per_hour": 0.0
+    },
+    "rows": [
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.8333,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.8611,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 0.8611,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 0.8611,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.8333,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.8889,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 0.9167,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 0.9167,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.8333,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.9167,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.8333,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.9167,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.8333,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.8611,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 0.8611,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 0.8611,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.8611,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.9444,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 0.9444,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 0.9444,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.8611,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.9444,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.8611,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.9444,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 1.5,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.8889,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.8889,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 0.8889,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 0.8889,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.9167,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.9444,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.9167,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.9444,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.9167,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.9444,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 1.0,
+        "still_s": 2.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 0.9722,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 1.5,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 2.0,
+        "still_s": 2.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 1.5,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 1.5,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 2.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 20.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 30.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 45.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      },
+      {
+        "settle_s": 3.0,
+        "still_s": 2.0,
+        "still_acc_std": 3.0,
+        "still_gyro_dps": 60.0,
+        "fall_recall": 1.0,
+        "false_alarms": 0,
+        "false_alarms_per_hour": 0.0
+      }
+    ]
+  }
+}

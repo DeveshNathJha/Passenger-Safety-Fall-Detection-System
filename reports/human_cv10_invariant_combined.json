@@ -1,0 +1,854 @@
+{
+  "task": "human",
+  "architecture": "1D-CNN",
+  "input_features": "invariant",
+  "protocol": "10-fold group CV",
+  "pooled": {
+    "accuracy": 0.9961,
+    "precision": 0.9739,
+    "recall": 0.9678,
+    "specificity": 0.9981,
+    "f1": 0.9708,
+    "false_alarms_per_hour": 5.29,
+    "confusion_matrix": {
+      "tn": 43538,
+      "fp": 82,
+      "fn": 102,
+      "tp": 3062
+    }
+  },
+  "per_fold": {
+    "n_folds_with_both_classes": 10,
+    "accuracy": {
+      "mean": 0.996,
+      "std": 0.0019,
+      "median": 0.9961
+    },
+    "precision": {
+      "mean": 0.9716,
+      "std": 0.0287,
+      "median": 0.9768
+    },
+    "recall": {
+      "mean": 0.9688,
+      "std": 0.0216,
+      "median": 0.9766
+    },
+    "f1": {
+      "mean": 0.9698,
+      "std": 0.0162,
+      "median": 0.9757
+    },
+    "pr_auc": {
+      "mean": 0.9928,
+      "std": 0.0098,
+      "median": 0.996
+    }
+  },
+  "folds": [
+    {
+      "n": 4891,
+      "n_events": 227,
+      "accuracy": 0.9984,
+      "precision": 0.974,
+      "recall": 0.9912,
+      "specificity": 0.9987,
+      "f1": 0.9825,
+      "roc_auc": 0.9984,
+      "pr_auc": 0.9951,
+      "false_alarms_per_hour": 3.62,
+      "confusion_matrix": {
+        "tn": 4658,
+        "fp": 6,
+        "fn": 2,
+        "tp": 225
+      },
+      "test_groups": [
+        "SA04",
+        "SA13",
+        "SE01",
+        "SE02",
+        "SE05"
+      ],
+      "by_domain": {
+        "sisfall_elderly": {
+          "n": 2548,
+          "n_events": 0,
+          "accuracy": 0.9992,
+          "precision": 0.0,
+          "recall": 0.0,
+          "specificity": 0.9992,
+          "f1": 0.0,
+          "roc_auc": null,
+          "pr_auc": null,
+          "false_alarms_per_hour": 2.21,
+          "confusion_matrix": {
+            "tn": 2546,
+            "fp": 2,
+            "fn": 0,
+            "tp": 0
+          }
+        },
+        "sisfall_young": {
+          "n": 2343,
+          "n_events": 227,
+          "accuracy": 0.9974,
+          "precision": 0.9825,
+          "recall": 0.9912,
+          "specificity": 0.9981,
+          "f1": 0.9868,
+          "roc_auc": 0.998,
+          "pr_auc": 0.9958,
+          "false_alarms_per_hour": 5.32,
+          "confusion_matrix": {
+            "tn": 2112,
+            "fp": 4,
+            "fn": 2,
+            "tp": 225
+          }
+        }
+      },
+      "threshold": 0.934
+    },
+    {
+      "n": 4337,
+      "n_events": 434,
+      "accuracy": 0.9938,
+      "precision": 1.0,
+      "recall": 0.9378,
+      "specificity": 1.0,
+      "f1": 0.9679,
+      "roc_auc": 0.9992,
+      "pr_auc": 0.9955,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 3903,
+        "fp": 0,
+        "fn": 27,
+        "tp": 407
+      },
+      "test_groups": [
+        "SA15",
+        "SA21",
+        "SE04",
+        "SE06",
+        "sub13",
+        "sub14",
+        "sub16",
+        "sub17",
+        "sub30"
+      ],
+      "by_domain": {
+        "mobifall": {
+          "n": 93,
+          "n_events": 93,
+          "accuracy": 0.9462,
+          "precision": 1.0,
+          "recall": 0.9462,
+          "specificity": 0.0,
+          "f1": 0.9724,
+          "roc_auc": null,
+          "pr_auc": null,
+          "false_alarms_per_hour": 0.0,
+          "confusion_matrix": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 5,
+            "tp": 88
+          }
+        },
+        "sisfall_elderly": {
+          "n": 1996,
+          "n_events": 119,
+          "accuracy": 0.99,
+          "precision": 1.0,
+          "recall": 0.8319,
+          "specificity": 1.0,
+          "f1": 0.9083,
+          "roc_auc": 0.9987,
+          "pr_auc": 0.9867,
+          "false_alarms_per_hour": 0.0,
+          "confusion_matrix": {
+            "tn": 1877,
+            "fp": 0,
+            "fn": 20,
+            "tp": 99
+          }
+        },
+        "sisfall_young": {
+          "n": 2248,
+          "n_events": 222,
+          "accuracy": 0.9991,
+          "precision": 1.0,
+          "recall": 0.991,
+          "specificity": 1.0,
+          "f1": 0.9955,
+          "roc_auc": 1.0,
+          "pr_auc": 1.0,
+          "false_alarms_per_hour": 0.0,
+          "confusion_matrix": {
+            "tn": 2026,
+            "fp": 0,
+            "fn": 2,
+            "tp": 220
+          }
+        }
+      },
+      "threshold": 0.8455
+    },
+    {
+      "n": 4337,
+      "n_events": 439,
+      "accuracy": 0.9942,
+      "precision": 0.9748,
+      "recall": 0.9681,
+      "specificity": 0.9972,
+      "f1": 0.9714,
+      "roc_auc": 0.9996,
+      "pr_auc": 0.9965,
+      "false_alarms_per_hour": 7.94,
+      "confusion_matrix": {
+        "tn": 3887,
+        "fp": 11,
+        "fn": 14,
+        "tp": 425
+      },
+      "test_groups": [
+        "SA07",
+        "SA12",
+        "SA19",
+        "sub01",
+        "sub06",
+        "sub09",
+        "sub15",
+        "sub19",
+        "sub21"
+      ],
+      "by_domain": {
+        "mobifall": {
+          "n": 834,
+          "n_events": 110,
+          "accuracy": 0.9796,
+          "precision": 0.9043,
+          "recall": 0.9455,
+          "specificity": 0.9848,
+          "f1": 0.9244,
+          "roc_auc": 0.9963,
+          "pr_auc": 0.9727,
+          "false_alarms_per_hour": 42.73,
+          "confusion_matrix": {
+            "tn": 713,
+            "fp": 11,
+            "fn": 6,
+            "tp": 104
+          }
+        },
+        "sisfall_young": {
+          "n": 3503,
+          "n_events": 329,
+          "accuracy": 0.9977,
+          "precision": 1.0,
+          "recall": 0.9757,
+          "specificity": 1.0,
+          "f1": 0.9877,
+          "roc_auc": 0.9999,
+          "pr_auc": 0.9993,
+          "false_alarms_per_hour": 0.0,
+          "confusion_matrix": {
+            "tn": 3174,
+            "fp": 0,
+            "fn": 8,
+            "tp": 321
+          }
+        }
+      },
+      "threshold": 0.8846
+    },
+    {
+      "n": 4338,
+      "n_events": 458,
+      "accuracy": 0.9961,
+      "precision": 0.9889,
+      "recall": 0.9738,
+      "specificity": 0.9987,
+      "f1": 0.9813,
+      "roc_auc": 0.9999,
+      "pr_auc": 0.9989,
+      "false_alarms_per_hour": 3.62,
+      "confusion_matrix": {
+        "tn": 3875,
+        "fp": 5,
+        "fn": 12,
+        "tp": 446
+      },
+      "test_groups": [
+        "SA08",
+        "SA09",
+        "SA17",
+        "sub11",
+        "sub12",
+        "sub18",
+        "sub20",
+        "sub29",
+        "sub31"
+      ],
+      "by_domain": {
+        "mobifall": {
+          "n": 840,
+          "n_events": 116,
+          "accuracy": 0.9917,
+          "precision": 1.0,
+          "recall": 0.9397,
+          "specificity": 1.0,
+          "f1": 0.9689,
+          "roc_auc": 0.9997,
+          "pr_auc": 0.9984,
+          "false_alarms_per_hour": 0.0,
+          "confusion_matrix": {
+            "tn": 724,
+            "fp": 0,
+            "fn": 7,
+            "tp": 109
+          }
+        },
+        "sisfall_young": {
+          "n": 3498,
+          "n_events": 342,
+          "accuracy": 0.9971,
+          "precision": 0.9854,
+          "recall": 0.9854,
+          "specificity": 0.9984,
+          "f1": 0.9854,
+          "roc_auc": 0.9999,
+          "pr_auc": 0.9994,
+          "false_alarms_per_hour": 4.46,
+          "confusion_matrix": {
+            "tn": 3151,
+            "fp": 5,
+            "fn": 5,
+            "tp": 337
+          }
+        }
+      },
+      "threshold": 0.916
+    },
+    {
+      "n": 4784,
+      "n_events": 247,
+      "accuracy": 0.9933,
+      "precision": 0.8938,
+      "recall": 0.9879,
+      "specificity": 0.9936,
+      "f1": 0.9385,
+      "roc_auc": 0.9993,
+      "pr_auc": 0.9932,
+      "false_alarms_per_hour": 17.98,
+      "confusion_matrix": {
+        "tn": 4508,
+        "fp": 29,
+        "fn": 3,
+        "tp": 244
+      },
+      "test_groups": [
+        "SA11",
+        "SA18",
+        "SE03",
+        "SE09",
+        "sub08"
+      ],
+      "by_domain": {
+        "mobifall": {
+          "n": 743,
+          "n_events": 19,
+          "accuracy": 0.9919,
+          "precision": 0.7826,
+          "recall": 0.9474,
+          "specificity": 0.9931,
+          "f1": 0.8571,
+          "roc_auc": 0.9966,
+          "pr_auc": 0.9473,
+          "false_alarms_per_hour": 19.42,
+          "confusion_matrix": {
+            "tn": 719,
+            "fp": 5,
+            "fn": 1,
+            "tp": 18
+          }
+        },
+        "sisfall_elderly": {
+          "n": 1697,
+          "n_events": 0,
+          "accuracy": 0.9929,
+          "precision": 0.0,
+          "recall": 0.0,
+          "specificity": 0.9929,
+          "f1": 0.0,
+          "roc_auc": null,
+          "pr_auc": null,
+          "false_alarms_per_hour": 19.89,
+          "confusion_matrix": {
+            "tn": 1685,
+            "fp": 12,
+            "fn": 0,
+            "tp": 0
+          }
+        },
+        "sisfall_young": {
+          "n": 2344,
+          "n_events": 228,
+          "accuracy": 0.994,
+          "precision": 0.9496,
+          "recall": 0.9912,
+          "specificity": 0.9943,
+          "f1": 0.97,
+          "roc_auc": 0.9998,
+          "pr_auc": 0.998,
+          "false_alarms_per_hour": 15.95,
+          "confusion_matrix": {
+            "tn": 2104,
+            "fp": 12,
+            "fn": 2,
+            "tp": 226
+          }
+        }
+      },
+      "threshold": 0.7616
+    },
+    {
+      "n": 4785,
+      "n_events": 250,
+      "accuracy": 0.9962,
+      "precision": 0.9833,
+      "recall": 0.944,
+      "specificity": 0.9991,
+      "f1": 0.9633,
+      "roc_auc": 0.9999,
+      "pr_auc": 0.9982,
+      "false_alarms_per_hour": 2.48,
+      "confusion_matrix": {
+        "tn": 4531,
+        "fp": 4,
+        "fn": 14,
+        "tp": 236
+      },
+      "test_groups": [
+        "SA01",
+        "SA14",
+        "SE11",
+        "SE14",
+        "sub07"
+      ],
+      "by_domain": {
+        "mobifall": {
+          "n": 745,
+          "n_events": 22,
+          "accuracy": 0.9919,
+          "precision": 0.9,
+          "recall": 0.8182,
+          "specificity": 0.9972,
+          "f1": 0.8571,
+          "roc_auc": 0.9983,
+          "pr_auc": 0.948,
+          "false_alarms_per_hour": 7.78,
+          "confusion_matrix": {
+            "tn": 721,
+            "fp": 2,
+            "fn": 4,
+            "tp": 18
+          }
+        },
+        "sisfall_elderly": {
+          "n": 1696,
+          "n_events": 0,
+          "accuracy": 1.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "specificity": 1.0,
+          "f1": 0.0,
+          "roc_auc": null,
+          "pr_auc": null,
+          "false_alarms_per_hour": 0.0,
+          "confusion_matrix": {
+            "tn": 1696,
+            "fp": 0,
+            "fn": 0,
+            "tp": 0
+          }
+        },
+        "sisfall_young": {
+          "n": 2344,
+          "n_events": 228,
+          "accuracy": 0.9949,
+          "precision": 0.9909,
+          "recall": 0.9561,
+          "specificity": 0.9991,
+          "f1": 0.9732,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9996,
+          "false_alarms_per_hour": 2.66,
+          "confusion_matrix": {
+            "tn": 2114,
+            "fp": 2,
+            "fn": 10,
+            "tp": 218
+          }
+        }
+      },
+      "threshold": 0.9932
+    },
+    {
+      "n": 4790,
+      "n_events": 241,
+      "accuracy": 0.9987,
+      "precision": 0.9958,
+      "recall": 0.9793,
+      "specificity": 0.9998,
+      "f1": 0.9874,
+      "roc_auc": 0.9974,
+      "pr_auc": 0.9921,
+      "false_alarms_per_hour": 0.62,
+      "confusion_matrix": {
+        "tn": 4548,
+        "fp": 1,
+        "fn": 5,
+        "tp": 236
+      },
+      "test_groups": [
+        "SA02",
+        "SA06",
+        "SE07",
+        "SE15",
+        "sub05"
+      ],
+      "by_domain": {
+        "mobifall": {
+          "n": 738,
+          "n_events": 14,
+          "accuracy": 0.9973,
+          "precision": 1.0,
+          "recall": 0.8571,
+          "specificity": 1.0,
+          "f1": 0.9231,
+          "roc_auc": 1.0,
+          "pr_auc": 1.0,
+          "false_alarms_per_hour": 0.0,
+          "confusion_matrix": {
+            "tn": 724,
+            "fp": 0,
+            "fn": 2,
+            "tp": 12
+          }
+        },
+        "sisfall_elderly": {
+          "n": 1709,
+          "n_events": 0,
+          "accuracy": 1.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "specificity": 1.0,
+          "f1": 0.0,
+          "roc_auc": null,
+          "pr_auc": null,
+          "false_alarms_per_hour": 0.0,
+          "confusion_matrix": {
+            "tn": 1709,
+            "fp": 0,
+            "fn": 0,
+            "tp": 0
+          }
+        },
+        "sisfall_young": {
+          "n": 2343,
+          "n_events": 227,
+          "accuracy": 0.9983,
+          "precision": 0.9956,
+          "recall": 0.9868,
+          "specificity": 0.9995,
+          "f1": 0.9912,
+          "roc_auc": 0.9971,
+          "pr_auc": 0.9933,
+          "false_alarms_per_hour": 1.33,
+          "confusion_matrix": {
+            "tn": 2115,
+            "fp": 1,
+            "fn": 3,
+            "tp": 224
+          }
+        }
+      },
+      "threshold": 0.7039
+    },
+    {
+      "n": 4957,
+      "n_events": 372,
+      "accuracy": 0.9974,
+      "precision": 0.9787,
+      "recall": 0.9866,
+      "specificity": 0.9983,
+      "f1": 0.9826,
+      "roc_auc": 0.9998,
+      "pr_auc": 0.9976,
+      "false_alarms_per_hour": 4.91,
+      "confusion_matrix": {
+        "tn": 4577,
+        "fp": 8,
+        "fn": 5,
+        "tp": 367
+      },
+      "test_groups": [
+        "SA05",
+        "SA10",
+        "SA20",
+        "sub02",
+        "sub04"
+      ],
+      "by_domain": {
+        "mobifall": {
+          "n": 1486,
+          "n_events": 39,
+          "accuracy": 0.9946,
+          "precision": 0.8605,
+          "recall": 0.9487,
+          "specificity": 0.9959,
+          "f1": 0.9024,
+          "roc_auc": 0.9992,
+          "pr_auc": 0.9815,
+          "false_alarms_per_hour": 11.66,
+          "confusion_matrix": {
+            "tn": 1441,
+            "fp": 6,
+            "fn": 2,
+            "tp": 37
+          }
+        },
+        "sisfall_young": {
+          "n": 3471,
+          "n_events": 333,
+          "accuracy": 0.9986,
+          "precision": 0.994,
+          "recall": 0.991,
+          "specificity": 0.9994,
+          "f1": 0.9925,
+          "roc_auc": 0.9999,
+          "pr_auc": 0.9986,
+          "false_alarms_per_hour": 1.79,
+          "confusion_matrix": {
+            "tn": 3136,
+            "fp": 2,
+            "fn": 3,
+            "tp": 330
+          }
+        }
+      },
+      "threshold": 0.8923
+    },
+    {
+      "n": 4781,
+      "n_events": 248,
+      "accuracy": 0.9941,
+      "precision": 0.9545,
+      "recall": 0.9315,
+      "specificity": 0.9976,
+      "f1": 0.9429,
+      "roc_auc": 0.9773,
+      "pr_auc": 0.9641,
+      "false_alarms_per_hour": 6.82,
+      "confusion_matrix": {
+        "tn": 4522,
+        "fp": 11,
+        "fn": 17,
+        "tp": 231
+      },
+      "test_groups": [
+        "SA03",
+        "SA23",
+        "SE08",
+        "SE12",
+        "sub10"
+      ],
+      "by_domain": {
+        "mobifall": {
+          "n": 740,
+          "n_events": 19,
+          "accuracy": 0.9946,
+          "precision": 1.0,
+          "recall": 0.7895,
+          "specificity": 1.0,
+          "f1": 0.8824,
+          "roc_auc": 0.9996,
+          "pr_auc": 0.9863,
+          "false_alarms_per_hour": 0.0,
+          "confusion_matrix": {
+            "tn": 721,
+            "fp": 0,
+            "fn": 4,
+            "tp": 15
+          }
+        },
+        "sisfall_elderly": {
+          "n": 1696,
+          "n_events": 0,
+          "accuracy": 0.9976,
+          "precision": 0.0,
+          "recall": 0.0,
+          "specificity": 0.9976,
+          "f1": 0.0,
+          "roc_auc": null,
+          "pr_auc": null,
+          "false_alarms_per_hour": 6.63,
+          "confusion_matrix": {
+            "tn": 1692,
+            "fp": 4,
+            "fn": 0,
+            "tp": 0
+          }
+        },
+        "sisfall_young": {
+          "n": 2345,
+          "n_events": 229,
+          "accuracy": 0.9915,
+          "precision": 0.9686,
+          "recall": 0.9432,
+          "specificity": 0.9967,
+          "f1": 0.9558,
+          "roc_auc": 0.9751,
+          "pr_auc": 0.9667,
+          "false_alarms_per_hour": 9.3,
+          "confusion_matrix": {
+            "tn": 2109,
+            "fp": 7,
+            "fn": 13,
+            "tp": 216
+          }
+        }
+      },
+      "threshold": 0.9516
+    },
+    {
+      "n": 4784,
+      "n_events": 248,
+      "accuracy": 0.9979,
+      "precision": 0.9722,
+      "recall": 0.9879,
+      "specificity": 0.9985,
+      "f1": 0.98,
+      "roc_auc": 0.9998,
+      "pr_auc": 0.9972,
+      "false_alarms_per_hour": 4.34,
+      "confusion_matrix": {
+        "tn": 4529,
+        "fp": 7,
+        "fn": 3,
+        "tp": 245
+      },
+      "test_groups": [
+        "SA16",
+        "SA22",
+        "SE10",
+        "SE13",
+        "sub03"
+      ],
+      "by_domain": {
+        "mobifall": {
+          "n": 744,
+          "n_events": 20,
+          "accuracy": 0.9973,
+          "precision": 1.0,
+          "recall": 0.9,
+          "specificity": 1.0,
+          "f1": 0.9474,
+          "roc_auc": 0.9999,
+          "pr_auc": 0.9976,
+          "false_alarms_per_hour": 0.0,
+          "confusion_matrix": {
+            "tn": 724,
+            "fp": 0,
+            "fn": 2,
+            "tp": 18
+          }
+        },
+        "sisfall_elderly": {
+          "n": 1696,
+          "n_events": 0,
+          "accuracy": 1.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "specificity": 1.0,
+          "f1": 0.0,
+          "roc_auc": null,
+          "pr_auc": null,
+          "false_alarms_per_hour": 0.0,
+          "confusion_matrix": {
+            "tn": 1696,
+            "fp": 0,
+            "fn": 0,
+            "tp": 0
+          }
+        },
+        "sisfall_young": {
+          "n": 2344,
+          "n_events": 228,
+          "accuracy": 0.9966,
+          "precision": 0.9701,
+          "recall": 0.9956,
+          "specificity": 0.9967,
+          "f1": 0.9827,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9996,
+          "false_alarms_per_hour": 9.3,
+          "confusion_matrix": {
+            "tn": 2109,
+            "fp": 7,
+            "fn": 1,
+            "tp": 227
+          }
+        }
+      },
+      "threshold": 0.9729
+    }
+  ],
+  "pooled_by_domain": {
+    "mobifall": {
+      "accuracy": 0.9918,
+      "precision": 0.9458,
+      "recall": 0.927,
+      "specificity": 0.9963,
+      "f1": 0.9363,
+      "false_alarms_per_hour": 10.37,
+      "confusion_matrix": {
+        "tn": 6487,
+        "fp": 24,
+        "fn": 33,
+        "tp": 419
+      }
+    },
+    "sisfall_elderly": {
+      "accuracy": 0.9971,
+      "precision": 0.8462,
+      "recall": 0.8319,
+      "specificity": 0.9986,
+      "f1": 0.839,
+      "false_alarms_per_hour": 3.92,
+      "confusion_matrix": {
+        "tn": 12901,
+        "fp": 18,
+        "fn": 20,
+        "tp": 99
+      }
+    },
+    "sisfall_young": {
+      "accuracy": 0.9967,
+      "precision": 0.9845,
+      "recall": 0.9811,
+      "specificity": 0.9983,
+      "f1": 0.9828,
+      "false_alarms_per_hour": 4.65,
+      "confusion_matrix": {
+        "tn": 24150,
+        "fp": 40,
+        "fn": 49,
+        "tp": 2544
+      }
+    }
+  }
+}

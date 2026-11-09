@@ -1,0 +1,8 @@
+# Normalise line endings (repo is edited on Windows, CI and Docker run on Linux)
+* text=auto eol=lf
+*.bat text eol=crlf
+
+# Binary artefacts
+*.tflite binary
+*.keras binary
+*.png binary

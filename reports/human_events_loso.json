@@ -1,0 +1,741 @@
+{
+  "protocol": "event-level leave-one-subject-out (fold models exported to quantized TFLite)",
+  "task": "human",
+  "architecture": "1D-CNN",
+  "input_features": "invariant",
+  "checks": {
+    "check_off": null,
+    "check_default": {
+      "settle_s": 1.0,
+      "still_s": 1.5,
+      "still_acc_std": 1.5,
+      "still_gyro_dps": 30.0
+    },
+    "check_configured": {
+      "settle_s": 1.0,
+      "still_s": 1.5,
+      "still_acc_std": 3.0,
+      "still_gyro_dps": 60.0
+    }
+  },
+  "pooled": {
+    "check_off": {
+      "fall_recordings": 288,
+      "falls_detected": 286,
+      "fall_recall": 0.9931,
+      "missed_falls_by_code": {
+        "BSC": 1,
+        "SDL": 1
+      },
+      "off_target_events_in_fall_recordings": 0,
+      "adl_recordings": 342,
+      "adl_hours": 2.51,
+      "false_alarms": 19,
+      "false_alarms_per_hour": 7.57,
+      "adl_recordings_with_false_alarm": 16,
+      "false_alarms_by_code": {
+        "CSI": {
+          "recordings": 54,
+          "false_alarms": 11,
+          "minutes": 5.3
+        },
+        "CSO": {
+          "recordings": 54,
+          "false_alarms": 2,
+          "minutes": 5.3
+        },
+        "JOG": {
+          "recordings": 27,
+          "false_alarms": 6,
+          "minutes": 13.5
+        },
+        "JUM": {
+          "recordings": 27,
+          "false_alarms": 0,
+          "minutes": 13.5
+        },
+        "SCH": {
+          "recordings": 54,
+          "false_alarms": 0,
+          "minutes": 5.3
+        },
+        "STD": {
+          "recordings": 9,
+          "false_alarms": 0,
+          "minutes": 45.0
+        },
+        "STN": {
+          "recordings": 54,
+          "false_alarms": 0,
+          "minutes": 8.9
+        },
+        "STU": {
+          "recordings": 54,
+          "false_alarms": 0,
+          "minutes": 8.9
+        },
+        "WAL": {
+          "recordings": 9,
+          "false_alarms": 0,
+          "minutes": 45.0
+        }
+      }
+    },
+    "check_default": {
+      "fall_recordings": 288,
+      "falls_detected": 254,
+      "fall_recall": 0.8819,
+      "missed_falls_by_code": {
+        "BSC": 18,
+        "FKL": 7,
+        "FOL": 2,
+        "SDL": 7
+      },
+      "off_target_events_in_fall_recordings": 0,
+      "adl_recordings": 342,
+      "adl_hours": 2.51,
+      "false_alarms": 3,
+      "false_alarms_per_hour": 1.2,
+      "adl_recordings_with_false_alarm": 3,
+      "false_alarms_by_code": {
+        "CSI": {
+          "recordings": 54,
+          "false_alarms": 2,
+          "minutes": 5.3
+        },
+        "CSO": {
+          "recordings": 54,
+          "false_alarms": 1,
+          "minutes": 5.3
+        },
+        "JOG": {
+          "recordings": 27,
+          "false_alarms": 0,
+          "minutes": 13.5
+        },
+        "JUM": {
+          "recordings": 27,
+          "false_alarms": 0,
+          "minutes": 13.5
+        },
+        "SCH": {
+          "recordings": 54,
+          "false_alarms": 0,
+          "minutes": 5.3
+        },
+        "STD": {
+          "recordings": 9,
+          "false_alarms": 0,
+          "minutes": 45.0
+        },
+        "STN": {
+          "recordings": 54,
+          "false_alarms": 0,
+          "minutes": 8.9
+        },
+        "STU": {
+          "recordings": 54,
+          "false_alarms": 0,
+          "minutes": 8.9
+        },
+        "WAL": {
+          "recordings": 9,
+          "false_alarms": 0,
+          "minutes": 45.0
+        }
+      }
+    },
+    "check_configured": {
+      "fall_recordings": 288,
+      "falls_detected": 278,
+      "fall_recall": 0.9653,
+      "missed_falls_by_code": {
+        "BSC": 7,
+        "SDL": 3
+      },
+      "off_target_events_in_fall_recordings": 0,
+      "adl_recordings": 342,
+      "adl_hours": 2.51,
+      "false_alarms": 12,
+      "false_alarms_per_hour": 4.78,
+      "adl_recordings_with_false_alarm": 12,
+      "false_alarms_by_code": {
+        "CSI": {
+          "recordings": 54,
+          "false_alarms": 11,
+          "minutes": 5.3
+        },
+        "CSO": {
+          "recordings": 54,
+          "false_alarms": 1,
+          "minutes": 5.3
+        },
+        "JOG": {
+          "recordings": 27,
+          "false_alarms": 0,
+          "minutes": 13.5
+        },
+        "JUM": {
+          "recordings": 27,
+          "false_alarms": 0,
+          "minutes": 13.5
+        },
+        "SCH": {
+          "recordings": 54,
+          "false_alarms": 0,
+          "minutes": 5.3
+        },
+        "STD": {
+          "recordings": 9,
+          "false_alarms": 0,
+          "minutes": 45.0
+        },
+        "STN": {
+          "recordings": 54,
+          "false_alarms": 0,
+          "minutes": 8.9
+        },
+        "STU": {
+          "recordings": 54,
+          "false_alarms": 0,
+          "minutes": 8.9
+        },
+        "WAL": {
+          "recordings": 9,
+          "false_alarms": 0,
+          "minutes": 45.0
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "subject": "sub01",
+      "threshold": 0.9386,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 10,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 10,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub02",
+      "threshold": 0.9991,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 7,
+        "adl_hours": 0.279,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 9,
+        "adl_hours": 0.279,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub03",
+      "threshold": 0.9406,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 11,
+        "adl_hours": 0.279,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub04",
+      "threshold": 0.9505,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 11,
+        "adl_hours": 0.279,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub05",
+      "threshold": 0.927,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub06",
+      "threshold": 0.986,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub07",
+      "threshold": 0.8595,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 3
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 11,
+        "adl_hours": 0.279,
+        "false_alarms": 1
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 3
+      }
+    },
+    {
+      "subject": "sub08",
+      "threshold": 0.9124,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 1
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 9,
+        "adl_hours": 0.279,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 1
+      }
+    },
+    {
+      "subject": "sub09",
+      "threshold": 0.9796,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 2
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 10,
+        "adl_hours": 0.279,
+        "false_alarms": 1
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 11,
+        "adl_hours": 0.279,
+        "false_alarms": 2
+      }
+    },
+    {
+      "subject": "sub10",
+      "threshold": 0.4706,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.278,
+        "false_alarms": 5
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 11,
+        "adl_hours": 0.278,
+        "false_alarms": 1
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.278,
+        "false_alarms": 1
+      }
+    },
+    {
+      "subject": "sub11",
+      "threshold": 0.7675,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 8
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.279,
+        "false_alarms": 5
+      }
+    },
+    {
+      "subject": "sub12",
+      "threshold": 0.2871,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub13",
+      "threshold": 0.8827,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub14",
+      "threshold": 0.9108,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub15",
+      "threshold": 0.99,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 11,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 11,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 11,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub16",
+      "threshold": 0.9958,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 11,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 9,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 11,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub17",
+      "threshold": 0.7567,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 11,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub18",
+      "threshold": 0.2869,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 11,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub19",
+      "threshold": 0.6507,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub20",
+      "threshold": 0.9758,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 7,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 11,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub21",
+      "threshold": 0.4289,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 8,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 11,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub29",
+      "threshold": 0.897,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 10,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub30",
+      "threshold": 0.4707,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      }
+    },
+    {
+      "subject": "sub31",
+      "threshold": 0.9906,
+      "check_off": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_default": {
+        "fall_recordings": 12,
+        "falls_detected": 11,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      },
+      "check_configured": {
+        "fall_recordings": 12,
+        "falls_detected": 12,
+        "adl_hours": 0.0,
+        "false_alarms": 0
+      }
+    }
+  ]
+}

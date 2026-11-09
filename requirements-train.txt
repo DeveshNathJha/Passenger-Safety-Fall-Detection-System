@@ -1,0 +1,6 @@
+# Model training, evaluation and TFLite conversion
+-r requirements.txt
+tensorflow-cpu>=2.18,<2.21
+scikit-learn>=1.4
+matplotlib>=3.8
+kagglehub>=0.3

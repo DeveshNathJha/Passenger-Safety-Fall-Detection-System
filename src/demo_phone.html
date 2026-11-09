@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Passenger Safety Monitor</title>
+  <style>
+    :root {
+      --bg: #0b1020; --card: #141b2e; --border: #24304d; --text: #e7ecf7; --muted: #8a96b3;
+      --blue: #4f8cff; --green: #22c55e; --red: #ef4444; --yellow: #f59e0b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg); color: var(--text);
+      min-height: 100vh; padding: 16px; display: flex; flex-direction: column; align-items: center;
+    }
+    main { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 12px; }
+    header { text-align: center; padding: 6px 0 4px; }
+    header h1 { font-size: 1.25rem; font-weight: 700; }
+    header p { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; }
+    .card h2 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; }
+    label { display: block; font-size: 0.75rem; color: var(--muted); margin: 8px 0 4px; }
+    input, select {
+      width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--bg); color: var(--text); font-size: 0.9rem;
+    }
+    .row { display: flex; gap: 8px; margin-top: 12px; }
+    button {
+      flex: 1; padding: 12px; border: 0; border-radius: 10px; font-weight: 700; font-size: 0.9rem;
+      cursor: pointer; color: #fff; background: var(--blue);
+    }
+    button.secondary { background: #2a3552; }
+    button:disabled { opacity: .45; cursor: not-allowed; }
+    .status { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); }
+    .dot.on { background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .dot.err { background: var(--red); }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .cell { background: var(--bg); border-radius: 10px; padding: 8px; text-align: center; }
+    .cell .k { font-size: 0.65rem; color: var(--muted); }
+    .cell .v { font-family: ui-monospace, monospace; font-size: 0.95rem; margin-top: 2px; }
+    #result { font-size: 1.9rem; font-weight: 800; text-align: center; padding: 6px 0; }
+    #result.normal { color: var(--green); }
+    #result.event { color: var(--red); }
+    #result.checking { color: var(--yellow); font-size: 1.3rem; }
+    .bar { height: 10px; background: var(--bg); border-radius: 6px; overflow: hidden; position: relative; margin-top: 6px; }
+    .bar > div { height: 100%; background: var(--blue); width: 0; transition: width .2s; }
+    .bar .thr { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--yellow); }
+    .meta { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--muted); margin-top: 6px; }
+    #log { font-family: ui-monospace, monospace; font-size: 0.7rem; color: var(--muted); max-height: 120px; overflow-y: auto; }
+    #log div { padding: 2px 0; border-bottom: 1px solid var(--border); }
+
+    /* SOS overlay */
+    #sos {
+      position: fixed; inset: 0; background: rgba(127, 29, 29, .96); display: none;
+      flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 24px; text-align: center; z-index: 10;
+    }
+    #sos h2 { font-size: 1.6rem; }
+    #sos .count { font-size: 5rem; font-weight: 900; font-variant-numeric: tabular-nums; }
+    #sos p { max-width: 340px; color: #fecaca; }
+    #sos button { background: #fff; color: #7f1d1d; font-size: 1.2rem; padding: 18px 28px; flex: none; width: 100%; max-width: 340px; }
+    footer { color: var(--muted); font-size: 0.7rem; text-align: center; margin-top: 8px; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Passenger Safety Monitor</h1>
+    <p>Edge-AI fall &amp; crash detection · 6-axis IMU · WebSocket</p>
+  </header>
+
+  <section class="card">
+    <h2>Connection</h2>
+    <div class="status"><span class="dot" id="dot"></span><span id="status">Disconnected</span></div>
+    <label for="mode">Model</label>
+    <select id="mode">
+      <option value="human">Human fall detection (MobiFall)</option>
+      <option value="car">Vehicle crash detection (synthetic)</option>
+    </select>
+    <label for="url">Server</label>
+    <input id="url" type="text" />
+    <label for="key">API key (only if the server sets FDS_API_KEY)</label>
+    <input id="key" type="password" autocomplete="off" />
+    <div class="row">
+      <button id="connect">Connect &amp; stream</button>
+      <button id="disconnect" class="secondary" disabled>Stop</button>
+    </div>
+    <div class="row" id="perm-row" style="display:none">
+      <button id="perm" class="secondary">Allow motion sensors (iOS)</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Detection</h2>
+    <div id="result" class="normal">–</div>
+    <div class="bar"><div id="score-bar"></div><span class="thr" id="thr-mark" style="left:50%"></span></div>
+    <div class="meta"><span>score <b id="score">–</b></span><span>threshold <b id="thr">–</b></span><span>latency <b id="lat">–</b></span></div>
+    <div class="bar" style="margin-top:12px"><div id="buf-bar"></div></div>
+    <div class="meta"><span>window buffer</span><span id="buf">0 / 128</span></div>
+  </section>
+
+  <section class="card">
+    <h2>Sensors</h2>
+    <div class="grid">
+      <div class="cell"><div class="k">acc x</div><div class="v" id="ax">–</div></div>
+      <div class="cell"><div class="k">acc y</div><div class="v" id="ay">–</div></div>
+      <div class="cell"><div class="k">acc z</div><div class="v" id="az">–</div></div>
+      <div class="cell"><div class="k">gyro x</div><div class="v" id="gx">–</div></div>
+      <div class="cell"><div class="k">gyro y</div><div class="v" id="gy">–</div></div>
+      <div class="cell"><div class="k">gyro z</div><div class="v" id="gz">–</div></div>
+      <div class="cell"><div class="k">sensor Hz</div><div class="v" id="hz">–</div></div>
+      <div class="cell"><div class="k">speed km/h</div><div class="v" id="spd">–</div></div>
+      <div class="cell"><div class="k">windows</div><div class="v" id="wins">0</div></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Events</h2>
+    <div id="log"></div>
+  </section>
+
+  <footer>Readings are streamed raw with timestamps; the server resamples to 50 Hz.<br/>
+    Both devices must be on the same network. Motion sensors need HTTPS on most browsers.</footer>
+</main>
+
+<div id="sos" role="alertdialog" aria-live="assertive">
+  <h2 id="sos-title">Fall detected</h2>
+  <div class="count" id="sos-count">15</div>
+  <p id="sos-text">An SOS with your location will be sent to your emergency contact when the countdown ends.</p>
+  <button id="sos-cancel">I'm OK — cancel</button>
+</div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const SEND_EVERY_MS = 100;           // batch readings: ~10 messages/s instead of 60+
+  let ws = null, flushTimer = null, hzTimer = null, countdownTimer = null;
+  let batch = [], hzCount = 0, windows = 0, pendingAlertId = null;
+  const gps = { lat: null, lon: null, speed: null };
+
+  // ── Defaults ───────────────────────────────────────────────────────────
+  const wsProto = location.protocol === 'https:' ? 'wss' : 'ws';
+  $('url').value = `${wsProto}://${location.host || 'YOUR_PC_IP:8000'}/ws/predict`;
+
+  function log(msg) {
+    const d = document.createElement('div');
+    d.textContent = `${new Date().toLocaleTimeString()}  ${msg}`;
+    $('log').prepend(d);
+  }
+  function setStatus(text, cls) { $('status').textContent = text; $('dot').className = 'dot ' + (cls || ''); }
+
+  // ── Sensors ────────────────────────────────────────────────────────────
+  function onMotion(e) {
+    const a = e.accelerationIncludingGravity, r = e.rotationRate;
+    if (!a || a.x === null) return;
+    // DeviceMotion: acc in m/s² incl. gravity, rotationRate in °/s (alpha=z, beta=x, gamma=y)
+    const s = {
+      acc_x: a.x, acc_y: a.y, acc_z: a.z,
+      gyro_x: (r && r.beta) || 0, gyro_y: (r && r.gamma) || 0, gyro_z: (r && r.alpha) || 0,
+      t: e.timeStamp,
+      latitude: gps.lat, longitude: gps.lon, speed_kmh: gps.speed,
+    };
+    batch.push(s);
+    hzCount++;
+    $('ax').textContent = s.acc_x.toFixed(2); $('ay').textContent = s.acc_y.toFixed(2); $('az').textContent = s.acc_z.toFixed(2);
+    $('gx').textContent = s.gyro_x.toFixed(0); $('gy').textContent = s.gyro_y.toFixed(0); $('gz').textContent = s.gyro_z.toFixed(0);
+  }
+
+  function startSensors() {
+    window.addEventListener('devicemotion', onMotion);
+    if ('geolocation' in navigator) {
+      navigator.geolocation.watchPosition((p) => {
+        gps.lat = p.coords.latitude; gps.lon = p.coords.longitude;
+        gps.speed = p.coords.speed === null ? null : Math.max(0, p.coords.speed * 3.6);  // null ≠ 0 km/h
+        $('spd').textContent = gps.speed === null ? 'n/a' : gps.speed.toFixed(0);
+      }, (err) => log('GPS: ' + err.message), { enableHighAccuracy: true });
+    }
+  }
+
+  if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+    $('perm-row').style.display = 'flex';
+    $('perm').onclick = async () => {
+      const res = await DeviceMotionEvent.requestPermission();
+      log('Motion permission: ' + res);
+      if (res === 'granted') { $('perm-row').style.display = 'none'; startSensors(); }
+    };
+  } else {
+    startSensors();
+  }
+
+  // ── WebSocket ──────────────────────────────────────────────────────────
+  $('connect').onclick = () => {
+    const params = new URLSearchParams({ model: $('mode').value });
+    if ($('key').value) params.set('api_key', $('key').value);
+    connect(`${$('url').value.trim()}?${params}`);
+  };
+  $('disconnect').onclick = () => ws && ws.close();
+
+  function connect(url) {
+    setStatus('Connecting…');
+    ws = new WebSocket(url);
+    ws.onopen = () => {
+      setStatus('Streaming', 'on');
+      $('connect').disabled = true; $('disconnect').disabled = false; $('mode').disabled = true;
+      batch = []; windows = 0;
+      flushTimer = setInterval(flush, SEND_EVERY_MS);
+      hzTimer = setInterval(() => { $('hz').textContent = hzCount; hzCount = 0; }, 1000);
+    };
+    ws.onmessage = (ev) => handle(JSON.parse(ev.data));
+    ws.onerror = () => setStatus('Connection error', 'err');
+    ws.onclose = (ev) => {
+      clearInterval(flushTimer); clearInterval(hzTimer);
+      setStatus(`Disconnected${ev.code && ev.code !== 1000 ? ' (' + ev.code + ')' : ''}`, 'err');
+      $('connect').disabled = false; $('disconnect').disabled = true; $('mode').disabled = false;
+      ws = null;
+    };
+  }
+
+  function flush() {
+    if (!ws || ws.readyState !== WebSocket.OPEN || batch.length === 0) return;
+    ws.send(JSON.stringify({ type: 'batch', samples: batch }));
+    batch = [];
+  }
+
+  function handle(m) {
+    switch (m.event) {
+      case 'session_started':
+        log(`Session ${m.session_id} · model ${m.mode} · ${m.model.size_kb} KB`);
+        setThreshold(m.model.threshold);
+        break;
+      case 'buffering':
+        setBuffer(m.buffer_fill, m.window_size);
+        break;
+      case 'prediction':
+        windows++; $('wins').textContent = windows;
+        setBuffer(128, 128);
+        if (m.checking) {
+          $('result').textContent = 'Checking… are you still?';
+          $('result').className = 'checking';
+        } else {
+          $('result').textContent = m.label;
+          $('result').className = m.is_event ? 'event' : 'normal';
+        }
+        if (m.candidate) log(`Possible fall (score ${m.raw_score.toFixed(3)}) – checking for stillness`);
+        $('score').textContent = m.raw_score.toFixed(3);
+        $('score-bar').style.width = (m.raw_score * 100) + '%';
+        $('score-bar').style.background = (m.is_event || m.candidate) ? 'var(--red)' : 'var(--blue)';
+        $('lat').textContent = m.latency_ms.toFixed(2) + ' ms';
+        setThreshold(m.threshold);
+        break;
+      case 'confirmation':
+        if (m.is_event) {
+          $('result').textContent = m.label;
+          $('result').className = 'event';
+          log(`Confirmed: no movement after impact (|acc| std ${m.stillness.acc_std}, gyro ${m.stillness.gyro_mean} °/s)`);
+        } else {
+          $('result').textContent = 'Normal';
+          $('result').className = 'normal';
+          log(`Rejected: still moving after impact (|acc| std ${m.stillness.acc_std}, gyro ${m.stillness.gyro_mean} °/s)`);
+        }
+        break;
+      case 'alert_pending':
+        showSos(m.alert, m.countdown_s);
+        break;
+      case 'alert_cancelled':
+        hideSos(); log(`Alert #${m.alert.id} cancelled`);
+        break;
+      case 'alert_dispatched':
+        hideSos(); log(`SOS SENT for alert #${m.alert.id}`);
+        break;
+      case 'alert_failed':
+        hideSos(); log(`SOS FAILED for alert #${m.alert.id} – check server logs`);
+        break;
+      case 'alert_suppressed':
+        log(`Event suppressed: ${m.reason}`);
+        break;
+      case 'error':
+        log('Server: ' + m.detail);
+        break;
+    }
+  }
+
+  function setThreshold(t) {
+    $('thr').textContent = t.toFixed(3);
+    $('thr-mark').style.left = (t * 100) + '%';
+  }
+  function setBuffer(fill, size) {
+    $('buf').textContent = `${fill} / ${size}`;
+    $('buf-bar').style.width = (100 * fill / size) + '%';
+  }
+
+  // ── SOS countdown ──────────────────────────────────────────────────────
+  function showSos(alert, seconds) {
+    pendingAlertId = alert.id;
+    $('sos-title').textContent = alert.label;
+    $('sos').style.display = 'flex';
+    if (navigator.vibrate) navigator.vibrate([400, 200, 400, 200, 400]);
+    let left = Math.round(seconds);
+    $('sos-count').textContent = left;
+    clearInterval(countdownTimer);
+    countdownTimer = setInterval(() => {
+      left = Math.max(0, left - 1);
+      $('sos-count').textContent = left;
+      if (left === 0) { clearInterval(countdownTimer); $('sos-text').textContent = 'Sending SOS…'; }
+    }, 1000);
+    log(`Alert #${alert.id}: ${alert.label} (score ${alert.confidence})`);
+  }
+  function hideSos() {
+    clearInterval(countdownTimer);
+    $('sos').style.display = 'none';
+    $('sos-text').textContent = 'An SOS with your location will be sent to your emergency contact when the countdown ends.';
+    pendingAlertId = null;
+  }
+  $('sos-cancel').onclick = () => {
+    if (ws && pendingAlertId !== null) ws.send(JSON.stringify({ type: 'cancel_alert', alert_id: pendingAlertId }));
+  };
+</script>
+</body>
+</html>

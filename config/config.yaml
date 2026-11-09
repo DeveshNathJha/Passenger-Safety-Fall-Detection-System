@@ -1,0 +1,121 @@
+# ============================================================
+# Passenger Safety & Fall Detection System – Central Configuration
+# ============================================================
+# Secrets (Twilio credentials, API key) are NEVER stored here.
+# They are read from environment variables – see .env.example.
+# Set FDS_CONFIG=/path/to/other.yaml to load a different file.
+
+data:
+  dataset_id: "kmknation/mobifall-dataset-v20"
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  # Training data for the deployed human model: "mobifall" or "mobifall+sisfall".
+  # Pooling both (62 subjects, pocket + waist, incl. elderly) raised SisFall F1
+  # from 0.57 (MobiFall-only model, cross-dataset) to 0.98 in 10-fold group CV.
+  human_training: "mobifall+sisfall"
+  # MobiFall v2.0 activity codes
+  fall_classes: ["FOL", "FKL", "BSC", "SDL"]
+  adl_classes: ["STD", "WAL", "JOG", "JUM", "STU", "STN", "SCH", "CSI", "CSO"]
+  # Sensor axes (column order everywhere in the pipeline)
+  sensor_columns: ["acc_x", "acc_y", "acc_z", "gyro_x", "gyro_y", "gyro_z"]
+  # Fall windows are kept only if the impact peak lies inside
+  # [impact_margin, window_size - impact_margin) of the window.
+  impact_margin: 16
+  # Synthetic vehicle data
+  car_raw_dir: "data/raw/synthetic_car_crash"
+
+signal:
+  sample_rate_hz: 50          # every stream is resampled to this rate
+  acc_unit: "m/s^2"
+  gyro_unit: "deg/s"           # MobiFall rad/s is converted on load
+  acc_range: 156.9             # ±16 g – typical smartphone accelerometer full scale
+  gyro_range: 2000.0           # ±2000 °/s – typical smartphone gyroscope full scale
+
+windowing:
+  window_size: 128             # 2.56 s at 50 Hz
+  overlap: 0.5                 # 50% → step = 64 samples (1.28 s)
+
+model:
+  input_shape: [128, 6]
+  selected_architecture: "1D-CNN"   # 1D-CNN | LSTM | CNN-LSTM | Transformer
+  epochs: 30
+  batch_size: 64
+  learning_rate: 0.001
+  early_stopping_patience: 6
+  random_state: 42
+  # Subject-wise split – no subject appears in more than one split.
+  test_size: 0.2
+  val_size: 0.15
+  class_weighting: true
+  # Random 3-D rotation augmentation (applied identically to acc and gyro)
+  # makes the model robust to how the phone is held / mounted.
+  # Model input. "invariant": a layer inside the model turns raw acc/gyro into
+  # 6 rotation-invariant channels (|a|, vertical, horizontal; same for gyro)
+  # using the window's gravity direction. LOSO pooled F1 0.948 vs 0.855 for "raw".
+  input_features: "invariant"   # invariant | raw
+  # Only used with input_features: raw (a no-op for invariant inputs).
+  augment_rotation: true
+  augment_copies: 1
+  # Decision threshold is tuned on the validation split (max F1) unless fixed here.
+  prediction_threshold: null
+  labels:
+    0: "Normal Activity"
+    1: "FALL DETECTED"
+
+paths:
+  models_dir: "models"
+  reports_dir: "reports"
+  log_file: "logs/app.log"
+
+models:
+  human:
+    tflite: "models/human_fall.tflite"
+    keras: "models/human_fall.keras"
+    metadata: "models/human_fall.json"
+    labels: { 0: "Normal Activity", 1: "FALL DETECTED" }
+  car:
+    tflite: "models/car_crash.tflite"
+    keras: "models/car_crash.keras"
+    metadata: "models/car_crash.json"
+    labels: { 0: "Normal Driving", 1: "CRASH DETECTED" }
+
+inference:
+  # A window is reported as an event only if the score is above the model
+  # threshold in `confirm_k` of the last `confirm_n` windows.
+  confirm_k: 1
+  confirm_n: 1
+  # Phone lying perfectly still: |acc| std below this forces "normal".
+  static_variance_threshold: 0.05
+  # Post-fall stillness check: a positive window is only a candidate; it becomes
+  # an event if the period [impact + settle_s, impact + settle_s + still_s] is
+  # quiet (person lying still / vehicle at rest). Tune with src/evaluate_events.py.
+  post_fall_check:
+    enabled: true
+    modes: [human, car]
+    # Tuned on the VALIDATION subjects only (src/evaluate_events.py --grid):
+    # loosest setting that keeps fall recall – the defaults (1.5 m/s², 30 °/s)
+    # missed 2 backward falls onto a chair (people keep moving a little).
+    settle_s: 1.0             # skipped after the impact (bounces, rolling)
+    still_s: 1.5              # length of the period that must be still
+    still_acc_std: 3.0        # max std of |acc| in that period (m/s²)
+    still_gyro_dps: 60.0      # max mean |gyro| in that period (°/s)
+
+alerts:
+  countdown_s: 15              # user can cancel ("I'm OK") during this time
+  cooldown_s: 120              # no new alert for this long after one fires / is cancelled
+  dispatch_on_disconnect: true # if the phone disconnects mid-countdown, still send SOS
+  car:
+    # Crash is only plausible if the vehicle was actually moving recently.
+    min_recent_speed_kmh: 15.0
+    speed_lookback_s: 30
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  max_sessions: 50
+  max_message_bytes: 65536     # a 100 ms phone batch is ~1–3 KB
+
+logging:
+  level: "INFO"                # DEBUG | INFO | WARNING | ERROR
+  max_bytes: 5242880           # 5 MB per log file
+  backup_count: 3

@@ -1,0 +1,58 @@
+[
+  {
+    "architecture": "1D-CNN",
+    "params": 8494,
+    "tflite_size_kb": 14.71,
+    "latency_ms_p50": 0.012,
+    "train_time_s": 13.9,
+    "accuracy": 0.9793,
+    "precision": 0.7769,
+    "recall": 0.9712,
+    "f1": 0.8632,
+    "pr_auc": 0.9596,
+    "false_alarms_per_hour": 56.44,
+    "rotated_f1": 0.6175
+  },
+  {
+    "architecture": "LSTM",
+    "params": 20302,
+    "tflite_size_kb": 37.19,
+    "latency_ms_p50": 0.338,
+    "train_time_s": 87.4,
+    "accuracy": 0.7915,
+    "precision": 0.2411,
+    "recall": 0.9808,
+    "f1": 0.3871,
+    "pr_auc": 0.5571,
+    "false_alarms_per_hour": 624.78,
+    "rotated_f1": 0.1474
+  },
+  {
+    "architecture": "CNN-LSTM",
+    "params": 36366,
+    "tflite_size_kb": 55.19,
+    "latency_ms_p50": 0.207,
+    "train_time_s": 89.1,
+    "accuracy": 0.9839,
+    "precision": 0.9072,
+    "recall": 0.8462,
+    "f1": 0.8756,
+    "pr_auc": 0.9266,
+    "false_alarms_per_hour": 17.52,
+    "rotated_f1": 0.7018
+  },
+  {
+    "architecture": "Transformer",
+    "params": 1152,
+    "tflite_size_kb": 14.11,
+    "latency_ms_p50": 0.078,
+    "train_time_s": 61.6,
+    "accuracy": 0.9587,
+    "precision": 0.6333,
+    "recall": 0.9135,
+    "f1": 0.748,
+    "pr_auc": 0.9121,
+    "false_alarms_per_hour": 107.05,
+    "rotated_f1": 0.4775
+  }
+]

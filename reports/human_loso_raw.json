@@ -1,0 +1,577 @@
+{
+  "task": "human",
+  "architecture": "1D-CNN",
+  "protocol": "leave-one-subject-out",
+  "pooled": {
+    "accuracy": 0.9793,
+    "precision": 0.7852,
+    "recall": 0.9381,
+    "specificity": 0.9822,
+    "f1": 0.8548,
+    "false_alarms_per_hour": 50.11,
+    "confusion_matrix": {
+      "tn": 6395,
+      "fp": 116,
+      "fn": 28,
+      "tp": 424
+    }
+  },
+  "per_fold": {
+    "n_folds_with_both_classes": 9,
+    "accuracy": {
+      "mean": 0.9813,
+      "std": 0.021,
+      "median": 0.9893
+    },
+    "precision": {
+      "mean": 0.7174,
+      "std": 0.2719,
+      "median": 0.75
+    },
+    "recall": {
+      "mean": 0.9481,
+      "std": 0.0322,
+      "median": 0.9474
+    },
+    "f1": {
+      "mean": 0.7839,
+      "std": 0.1937,
+      "median": 0.84
+    },
+    "pr_auc": {
+      "mean": 0.941,
+      "std": 0.0735,
+      "median": 0.9704
+    }
+  },
+  "folds": [
+    {
+      "n": 748,
+      "n_events": 24,
+      "accuracy": 0.9746,
+      "precision": 0.5641,
+      "recall": 0.9167,
+      "specificity": 0.9765,
+      "f1": 0.6984,
+      "roc_auc": 0.9906,
+      "pr_auc": 0.8697,
+      "false_alarms_per_hour": 66.04,
+      "confusion_matrix": {
+        "tn": 707,
+        "fp": 17,
+        "fn": 2,
+        "tp": 22
+      },
+      "test_groups": [
+        "sub02"
+      ],
+      "threshold": 0.95
+    },
+    {
+      "n": 745,
+      "n_events": 21,
+      "accuracy": 0.9987,
+      "precision": 0.9545,
+      "recall": 1.0,
+      "specificity": 0.9986,
+      "f1": 0.9767,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "false_alarms_per_hour": 3.88,
+      "confusion_matrix": {
+        "tn": 723,
+        "fp": 1,
+        "fn": 0,
+        "tp": 21
+      },
+      "test_groups": [
+        "sub11"
+      ],
+      "threshold": 0.7228
+    },
+    {
+      "n": 745,
+      "n_events": 21,
+      "accuracy": 0.9987,
+      "precision": 1.0,
+      "recall": 0.9524,
+      "specificity": 1.0,
+      "f1": 0.9756,
+      "roc_auc": 0.9998,
+      "pr_auc": 0.994,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 724,
+        "fp": 0,
+        "fn": 1,
+        "tp": 20
+      },
+      "test_groups": [
+        "sub09"
+      ],
+      "threshold": 0.9996
+    },
+    {
+      "n": 745,
+      "n_events": 22,
+      "accuracy": 0.9893,
+      "precision": 0.75,
+      "recall": 0.9545,
+      "specificity": 0.9903,
+      "f1": 0.84,
+      "roc_auc": 0.9979,
+      "pr_auc": 0.939,
+      "false_alarms_per_hour": 27.23,
+      "confusion_matrix": {
+        "tn": 716,
+        "fp": 7,
+        "fn": 1,
+        "tp": 21
+      },
+      "test_groups": [
+        "sub07"
+      ],
+      "threshold": 0.8453
+    },
+    {
+      "n": 744,
+      "n_events": 20,
+      "accuracy": 0.9973,
+      "precision": 1.0,
+      "recall": 0.9,
+      "specificity": 1.0,
+      "f1": 0.9474,
+      "roc_auc": 0.999,
+      "pr_auc": 0.9794,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 724,
+        "fp": 0,
+        "fn": 2,
+        "tp": 18
+      },
+      "test_groups": [
+        "sub03"
+      ],
+      "threshold": 0.6047
+    },
+    {
+      "n": 743,
+      "n_events": 19,
+      "accuracy": 0.9354,
+      "precision": 0.2769,
+      "recall": 0.9474,
+      "specificity": 0.9351,
+      "f1": 0.4286,
+      "roc_auc": 0.9863,
+      "pr_auc": 0.7642,
+      "false_alarms_per_hour": 182.58,
+      "confusion_matrix": {
+        "tn": 677,
+        "fp": 47,
+        "fn": 1,
+        "tp": 18
+      },
+      "test_groups": [
+        "sub08"
+      ],
+      "threshold": 0.9294
+    },
+    {
+      "n": 740,
+      "n_events": 19,
+      "accuracy": 0.9568,
+      "precision": 0.3725,
+      "recall": 1.0,
+      "specificity": 0.9556,
+      "f1": 0.5429,
+      "roc_auc": 0.9976,
+      "pr_auc": 0.9524,
+      "false_alarms_per_hour": 124.83,
+      "confusion_matrix": {
+        "tn": 689,
+        "fp": 32,
+        "fn": 0,
+        "tp": 19
+      },
+      "test_groups": [
+        "sub10"
+      ],
+      "threshold": 0.6648
+    },
+    {
+      "n": 738,
+      "n_events": 14,
+      "accuracy": 0.9986,
+      "precision": 1.0,
+      "recall": 0.9286,
+      "specificity": 1.0,
+      "f1": 0.963,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 724,
+        "fp": 0,
+        "fn": 1,
+        "tp": 13
+      },
+      "test_groups": [
+        "sub05"
+      ],
+      "threshold": 0.8323
+    },
+    {
+      "n": 738,
+      "n_events": 15,
+      "accuracy": 0.9824,
+      "precision": 0.5385,
+      "recall": 0.9333,
+      "specificity": 0.9834,
+      "f1": 0.6829,
+      "roc_auc": 0.9989,
+      "pr_auc": 0.9704,
+      "false_alarms_per_hour": 46.68,
+      "confusion_matrix": {
+        "tn": 711,
+        "fp": 12,
+        "fn": 1,
+        "tp": 14
+      },
+      "test_groups": [
+        "sub04"
+      ],
+      "threshold": 0.8552
+    },
+    {
+      "n": 24,
+      "n_events": 24,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "f1": 1.0,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "tp": 24
+      },
+      "test_groups": [
+        "sub12"
+      ],
+      "threshold": 0.8218
+    },
+    {
+      "n": 23,
+      "n_events": 23,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "f1": 1.0,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "tp": 23
+      },
+      "test_groups": [
+        "sub17"
+      ],
+      "threshold": 0.8968
+    },
+    {
+      "n": 20,
+      "n_events": 20,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "f1": 1.0,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "tp": 20
+      },
+      "test_groups": [
+        "sub21"
+      ],
+      "threshold": 0.951
+    },
+    {
+      "n": 20,
+      "n_events": 20,
+      "accuracy": 0.65,
+      "precision": 1.0,
+      "recall": 0.65,
+      "specificity": 0.0,
+      "f1": 0.7879,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 0,
+        "fn": 7,
+        "tp": 13
+      },
+      "test_groups": [
+        "sub14"
+      ],
+      "threshold": 0.9933
+    },
+    {
+      "n": 19,
+      "n_events": 19,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "f1": 1.0,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "tp": 19
+      },
+      "test_groups": [
+        "sub20"
+      ],
+      "threshold": 0.7372
+    },
+    {
+      "n": 19,
+      "n_events": 19,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "f1": 1.0,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "tp": 19
+      },
+      "test_groups": [
+        "sub19"
+      ],
+      "threshold": 0.966
+    },
+    {
+      "n": 19,
+      "n_events": 19,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "f1": 1.0,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "tp": 19
+      },
+      "test_groups": [
+        "sub18"
+      ],
+      "threshold": 0.8612
+    },
+    {
+      "n": 19,
+      "n_events": 19,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "f1": 1.0,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "tp": 19
+      },
+      "test_groups": [
+        "sub16"
+      ],
+      "threshold": 0.9524
+    },
+    {
+      "n": 19,
+      "n_events": 19,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "f1": 1.0,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "tp": 19
+      },
+      "test_groups": [
+        "sub15"
+      ],
+      "threshold": 0.8691
+    },
+    {
+      "n": 17,
+      "n_events": 17,
+      "accuracy": 0.8235,
+      "precision": 1.0,
+      "recall": 0.8235,
+      "specificity": 0.0,
+      "f1": 0.9032,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 0,
+        "fn": 3,
+        "tp": 14
+      },
+      "test_groups": [
+        "sub31"
+      ],
+      "threshold": 0.9542
+    },
+    {
+      "n": 17,
+      "n_events": 17,
+      "accuracy": 0.7647,
+      "precision": 1.0,
+      "recall": 0.7647,
+      "specificity": 0.0,
+      "f1": 0.8667,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 0,
+        "fn": 4,
+        "tp": 13
+      },
+      "test_groups": [
+        "sub30"
+      ],
+      "threshold": 0.9594
+    },
+    {
+      "n": 17,
+      "n_events": 17,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "f1": 1.0,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "tp": 17
+      },
+      "test_groups": [
+        "sub06"
+      ],
+      "threshold": 0.8466
+    },
+    {
+      "n": 16,
+      "n_events": 16,
+      "accuracy": 0.875,
+      "precision": 1.0,
+      "recall": 0.875,
+      "specificity": 0.0,
+      "f1": 0.9333,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 0,
+        "fn": 2,
+        "tp": 14
+      },
+      "test_groups": [
+        "sub29"
+      ],
+      "threshold": 0.9767
+    },
+    {
+      "n": 14,
+      "n_events": 14,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "f1": 1.0,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "tp": 14
+      },
+      "test_groups": [
+        "sub13"
+      ],
+      "threshold": 0.9638
+    },
+    {
+      "n": 14,
+      "n_events": 14,
+      "accuracy": 0.7857,
+      "precision": 1.0,
+      "recall": 0.7857,
+      "specificity": 0.0,
+      "f1": 0.88,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_alarms_per_hour": 0.0,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 0,
+        "fn": 3,
+        "tp": 11
+      },
+      "test_groups": [
+        "sub01"
+      ],
+      "threshold": 0.9735
+    }
+  ]
+}

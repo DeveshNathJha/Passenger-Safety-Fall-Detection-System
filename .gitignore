@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+fall/
+ENV/
+
+# Editors / notebooks
+.vscode/
+.idea/
+.ipynb_checkpoints/
+
+# Secrets & local config
+.env
+.env.*
+!.env.example
+*.pem
+.agents/
+
+# Data (downloaded / generated – reproducible with src/preprocess.py)
+data/raw/
+data/processed/
+data/*.csv
+logs/
+*.log
+
+# Large / intermediate model files (the deployable .tflite + .json are tracked)
+models/*.h5
+# experiment models (cross-dataset); the deployed ones live in models/
+reports/*.tflite
+
+# Paper, report and presentation sources (kept outside the code repo)
+Journal/
+Conference Paper/
+PPT/
+A Lightweight Edge-AI Dual-Model IMU Framework/
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.toc
+*.synctex.gz
+generate_docx.py
+generate_formatted_paper.py
+
+# Notes & planning (private interview prep – never pushed)
+notes/
+PROJECT_AUDIT_AND_CV.md
+walkthrough.md
+implementation_plan.md
+CHANGELOG.txt
+
+# Bundled tools (install separately)
+mingit/
+tectonic/
+
+# OS / archives
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.zip
+*.rar
+*.tar.gz

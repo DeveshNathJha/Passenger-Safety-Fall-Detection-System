@@ -1,0 +1,263 @@
+{
+  "task": "sisfall",
+  "subjects": null,
+  "prefix": null,
+  "model": "cross_dataset_raw.tflite",
+  "threshold": 0.9949231743812561,
+  "check_params": {
+    "settle_s": 1.0,
+    "still_s": 1.5,
+    "still_acc_std": 3.0,
+    "still_gyro_dps": 60.0
+  },
+  "check_off": {
+    "fall_recordings": 1798,
+    "falls_detected": 1496,
+    "fall_recall": 0.832,
+    "missed_falls_by_code": {
+      "F01": 12,
+      "F02": 3,
+      "F03": 2,
+      "F04": 13,
+      "F05": 2,
+      "F06": 12,
+      "F07": 14,
+      "F08": 38,
+      "F09": 12,
+      "F10": 39,
+      "F11": 18,
+      "F12": 14,
+      "F13": 40,
+      "F14": 39,
+      "F15": 44
+    },
+    "off_target_events_in_fall_recordings": 3,
+    "adl_recordings": 2707,
+    "adl_hours": 14.534,
+    "false_alarms": 178,
+    "false_alarms_per_hour": 12.25,
+    "adl_recordings_with_false_alarm": 81,
+    "false_alarms_by_code": {
+      "D01": {
+        "recordings": 38,
+        "false_alarms": 0,
+        "minutes": 64.7
+      },
+      "D02": {
+        "recordings": 38,
+        "false_alarms": 0,
+        "minutes": 64.7
+      },
+      "D03": {
+        "recordings": 38,
+        "false_alarms": 27,
+        "minutes": 64.7
+      },
+      "D04": {
+        "recordings": 36,
+        "false_alarms": 70,
+        "minutes": 61.5
+      },
+      "D05": {
+        "recordings": 190,
+        "false_alarms": 3,
+        "minutes": 79.2
+      },
+      "D06": {
+        "recordings": 118,
+        "false_alarms": 45,
+        "minutes": 49.2
+      },
+      "D07": {
+        "recordings": 190,
+        "false_alarms": 0,
+        "minutes": 38.0
+      },
+      "D08": {
+        "recordings": 190,
+        "false_alarms": 0,
+        "minutes": 38.0
+      },
+      "D09": {
+        "recordings": 185,
+        "false_alarms": 0,
+        "minutes": 37.0
+      },
+      "D10": {
+        "recordings": 185,
+        "false_alarms": 0,
+        "minutes": 37.0
+      },
+      "D11": {
+        "recordings": 190,
+        "false_alarms": 8,
+        "minutes": 37.9
+      },
+      "D12": {
+        "recordings": 190,
+        "false_alarms": 0,
+        "minutes": 38.0
+      },
+      "D13": {
+        "recordings": 120,
+        "false_alarms": 3,
+        "minutes": 24.0
+      },
+      "D14": {
+        "recordings": 190,
+        "false_alarms": 2,
+        "minutes": 38.0
+      },
+      "D15": {
+        "recordings": 190,
+        "false_alarms": 0,
+        "minutes": 37.8
+      },
+      "D16": {
+        "recordings": 190,
+        "false_alarms": 0,
+        "minutes": 37.8
+      },
+      "D17": {
+        "recordings": 189,
+        "false_alarms": 2,
+        "minutes": 76.7
+      },
+      "D18": {
+        "recordings": 120,
+        "false_alarms": 13,
+        "minutes": 24.0
+      },
+      "D19": {
+        "recordings": 120,
+        "false_alarms": 5,
+        "minutes": 24.0
+      }
+    }
+  },
+  "check_on": {
+    "fall_recordings": 1798,
+    "falls_detected": 1487,
+    "fall_recall": 0.827,
+    "missed_falls_by_code": {
+      "F01": 14,
+      "F02": 3,
+      "F03": 2,
+      "F04": 13,
+      "F05": 9,
+      "F06": 12,
+      "F07": 14,
+      "F08": 38,
+      "F09": 12,
+      "F10": 39,
+      "F11": 18,
+      "F12": 14,
+      "F13": 40,
+      "F14": 39,
+      "F15": 44
+    },
+    "off_target_events_in_fall_recordings": 2,
+    "adl_recordings": 2707,
+    "adl_hours": 14.534,
+    "false_alarms": 33,
+    "false_alarms_per_hour": 2.27,
+    "adl_recordings_with_false_alarm": 33,
+    "false_alarms_by_code": {
+      "D01": {
+        "recordings": 38,
+        "false_alarms": 0,
+        "minutes": 64.7
+      },
+      "D02": {
+        "recordings": 38,
+        "false_alarms": 0,
+        "minutes": 64.7
+      },
+      "D03": {
+        "recordings": 38,
+        "false_alarms": 0,
+        "minutes": 64.7
+      },
+      "D04": {
+        "recordings": 36,
+        "false_alarms": 0,
+        "minutes": 61.5
+      },
+      "D05": {
+        "recordings": 190,
+        "false_alarms": 0,
+        "minutes": 79.2
+      },
+      "D06": {
+        "recordings": 118,
+        "false_alarms": 5,
+        "minutes": 49.2
+      },
+      "D07": {
+        "recordings": 190,
+        "false_alarms": 0,
+        "minutes": 38.0
+      },
+      "D08": {
+        "recordings": 190,
+        "false_alarms": 0,
+        "minutes": 38.0
+      },
+      "D09": {
+        "recordings": 185,
+        "false_alarms": 0,
+        "minutes": 37.0
+      },
+      "D10": {
+        "recordings": 185,
+        "false_alarms": 0,
+        "minutes": 37.0
+      },
+      "D11": {
+        "recordings": 190,
+        "false_alarms": 8,
+        "minutes": 37.9
+      },
+      "D12": {
+        "recordings": 190,
+        "false_alarms": 0,
+        "minutes": 38.0
+      },
+      "D13": {
+        "recordings": 120,
+        "false_alarms": 3,
+        "minutes": 24.0
+      },
+      "D14": {
+        "recordings": 190,
+        "false_alarms": 2,
+        "minutes": 38.0
+      },
+      "D15": {
+        "recordings": 190,
+        "false_alarms": 0,
+        "minutes": 37.8
+      },
+      "D16": {
+        "recordings": 190,
+        "false_alarms": 0,
+        "minutes": 37.8
+      },
+      "D17": {
+        "recordings": 189,
+        "false_alarms": 0,
+        "minutes": 76.7
+      },
+      "D18": {
+        "recordings": 120,
+        "false_alarms": 12,
+        "minutes": 24.0
+      },
+      "D19": {
+        "recordings": 120,
+        "false_alarms": 3,
+        "minutes": 24.0
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+# ============================================================
+# Serving (API server / edge device) – no TensorFlow needed
+# ============================================================
+# Training:     pip install -r requirements-train.txt
+# Development:  pip install -r requirements-dev.txt
+
+numpy>=1.26,<2.2
+pyyaml>=6.0
+pydantic>=2.6,<3
+fastapi>=0.110,<1
+uvicorn[standard]>=0.27
+
+# Lightweight TFLite runtime (successor of tflite-runtime). Linux/macOS wheels;
+# on Windows the server falls back to tensorflow from requirements-train.txt.
+ai-edge-litert>=1.2; sys_platform != "win32"
+
+# Optional – real SMS. Without it (or without TWILIO_* env vars) SOS alerts are logged.
+twilio>=9.0

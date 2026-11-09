@@ -1,0 +1,23 @@
+[project]
+name = "passenger-safety-fall-detection"
+version = "2.0.0"
+description = "Edge-AI fall and vehicle-crash detection from smartphone IMU data with a cancellable SOS workflow."
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+extend-exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E402", "B008", "B905", "UP007", "UP045"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["src", "scripts", "tests"]
